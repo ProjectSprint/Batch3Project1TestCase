@@ -11,3 +11,7 @@
     BASE_URL=http://localhost:8080 k6 run main.js
     ```
     ⚠️ Adjust the `BASE_URL` value to your backend path
+
+### Environment Variables
+- `BASE_URL` (string,url) sets the base url of the backend
+- `DEBUG` (boolean) show what was sent to the backend, and what is the response
