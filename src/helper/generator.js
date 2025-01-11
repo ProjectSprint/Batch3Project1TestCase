@@ -618,13 +618,3 @@ export function generateTestObjects(schema, validTemplate) {
 
   return violations;
 }
-
-/**
- * Helper function to deep clone objects
- * @template T
- * @param {T} obj
- * @returns {T}
- */
-function clone(obj) {
-  return JSON.parse(JSON.stringify(obj));
-}

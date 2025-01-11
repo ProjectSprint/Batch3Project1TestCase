@@ -23,6 +23,5 @@ export function isEmployee(value) {
     'employeeImageUri' in value && typeof value.employeeImageUri === 'string' &&
     'gender' in value && typeof value.gender === 'string' &&
     'departmentId' in value && typeof value.departmentId === 'string'
-
     ;
 }

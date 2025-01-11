@@ -1,0 +1,25 @@
+{
+  "name": "projectsprint-batch3-project1-testcase",
+  "version": "1.0.0",
+  "description": "test case for ProjectSprint program",
+  "main": "main.js",
+  "scripts": {
+    "lint:fix":"eslint --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ProjectSprint/Batch3Project1TestCase.git"
+  },
+  "author": "nandanugg",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ProjectSprint/Batch3Project1TestCase/issues"
+  },
+  "homepage": "https://github.com/ProjectSprint/Batch3Project1TestCase#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.18.0",
+    "eslint": "^9.18.0",
+    "globals": "^15.14.0",
+    "typescript-eslint": "^8.19.1"
+  }
+}
