@@ -120,8 +120,8 @@ export function PatchProfileTest(user, config, tags, opts) {
         companyName: {
           type: "string",
           notNull: true,
-          minLength: 8,
-          maxLength: 32,
+          minLength: 4,
+          maxLength: 52,
         },
         companyImageUri: {
           type: "string",
@@ -167,8 +167,8 @@ export function PatchProfileTest(user, config, tags, opts) {
       ["should have email and equal"]: (v) => isEqual(v, "email", user.email),
       ["should have name and equal"]: (v) =>
         isEqual(v, "name", positivePayload.name),
-      ["should have userImgUri and equal"]: (v) =>
-        isEqual(v, "userImgUri", positivePayload.userImageUri),
+      ["should have userImageUri and equal"]: (v) =>
+        isEqual(v, "userImageUri", positivePayload.userImageUri),
       ["should have companyName and equal"]: (v) =>
         isEqual(v, "companyName", positivePayload.companyName),
       ["should have companyImageUri and equal"]: (v) =>
@@ -184,8 +184,8 @@ export function PatchProfileTest(user, config, tags, opts) {
         ["should have email and equal"]: (v) => isEqual(v, "email", user.email),
         ["should have name and equal"]: (v) =>
           isEqual(v, "name", positivePayload.name),
-        ["should have userImgUri and equal"]: (v) =>
-          isEqual(v, "userImgUri", positivePayload.userImageUri),
+        ["should have userImageUri and equal"]: (v) =>
+          isEqual(v, "userImageUri", positivePayload.userImageUri),
         ["should have companyName and equal"]: (v) =>
           isEqual(v, "companyName", positivePayload.companyName),
         ["should have companyImageUri and equal"]: (v) =>
