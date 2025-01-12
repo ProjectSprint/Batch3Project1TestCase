@@ -4,6 +4,11 @@ import { generateRandomNumber } from "./src/helper/generator.js"
 import { DeleteEmployeeTest, PatchEmployeeTest, PostEmployeeTest } from "./src/scenario/employeeTest.js"
 import { fail } from 'k6';
 
+export const options = {
+  vus: 1,
+  iterations: 1
+};
+
 export default function() {
   /** @type {import("./src/types/config.js").Config} */
   const config = {
