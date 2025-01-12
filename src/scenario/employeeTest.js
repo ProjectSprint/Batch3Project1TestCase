@@ -371,7 +371,7 @@ export function PatchEmployeeTest(user, employee, config, tags, opts) {
     positivePayload,
     positiveHeader,
     {
-      ["should return 201"]: (v) => v.status === 201,
+      ["should return 200"]: (v) => v.status === 200,
       ["should have departmentId"]: (v) => isExists(v, "departmentId"),
       ["should have identityNumber and equal"]: (v) =>
         isEqual(v, "identityNumber", positivePayload.identityNumber),
