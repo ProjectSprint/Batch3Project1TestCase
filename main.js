@@ -5,7 +5,6 @@ import { DeleteEmployeeTest, GetEmployeeTest, PatchEmployeeTest, PostEmployeeTes
 import { fail } from 'k6';
 import { UploadFileTest } from "./src/scenario/fileTest.js";
 import { GetProfileTest, PatchProfileTest } from "./src/scenario/profileTest.js";
-import { file } from "./src/types/k6-http.js";
 
 export const options = {
   vus: 1,
