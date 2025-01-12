@@ -29,10 +29,6 @@ export default function() {
   LoginTest(user, config, tags)
 
   // ===== UPLOAD TEST =====
-  //const smallFile = open('../figure/image-50KB.jpg', 'b');
-  //const medFile = open('../figure/image-100KB.jpg', 'b');
-  //const bigFile = open('../figure/image-200KB.jpg', 'b');
-  //const invalidFile = open('../figure/sql-5KB.sql', 'b');
   const fileUri = UploadFileTest(user, {
     small: open('./src/figure/image-50KB.jpg', 'b'),
     medium: open('./src/figure/image-100KB.jpg', 'b'),
