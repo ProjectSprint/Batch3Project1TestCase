@@ -23,58 +23,35 @@ export function GetProfileTest(user, config, tags) {
   };
   if (config.runNegativeCase) {
     assertHandler(
-      "empty token",
-      featureName,
-      route,
-      {},
-      {},
+      "empty token", featureName, route, {}, {},
       {
         ["should return 401"]: (v) => v.status === 401,
       },
-      config,
-      tags,
+      config, tags,
     );
     const negativeHeaders = [
-      {
-        Authorization: `${user.token}`,
-      },
-      {
-        Authorization: `bearer asdf${user.token}`,
-      },
-      {
-        Authorization: ``,
-      },
+      { Authorization: `${user.token}`, },
+      { Authorization: `bearer asdf${user.token}`, },
+      { Authorization: ``, },
     ];
 
     negativeHeaders.forEach((header) => {
       assertHandler(
-        "invalid token",
-        featureName,
-        route,
-        {},
-        header,
+        "invalid token", featureName, route, {}, header,
         {
           ["should return 401"]: (res) => res.status === 401,
         },
-        config,
-        tags,
-      );
+        config, tags,);
     });
   }
 
   assertHandler(
-    "valid payload",
-    featureName,
-    route,
-    {},
-    positiveHeader,
+    "valid payload", featureName, route, {}, positiveHeader,
     {
       ["should return 200"]: (v) => v.status === 200,
       ["should have email and equal"]: (v) => isEqual(v, "email", user.email),
     },
-    config,
-    tags,
-  );
+    config, tags,);
 }
 
 /**
@@ -82,7 +59,7 @@ export function GetProfileTest(user, config, tags) {
  * @param {import("../types/config.d.ts").Config} config
  * @param {{[name: string]: string}} tags
  * @param {{useFileUris?:string[],userCollideInformation?:User} }opts
-  * @returns User more complete user
+  * @returns { User | undefined } more complete user
  */
 export function PatchProfileTest(user, config, tags, opts) {
   const featureName = "Patch Profile";
@@ -107,44 +84,24 @@ export function PatchProfileTest(user, config, tags, opts) {
   };
   if (config.runNegativeCase) {
     assertHandler(
-      "empty token",
-      featureName,
-      route,
-      {},
-      {},
+      "empty token", featureName, route, {}, {},
       {
         ["should return 401"]: (v) => v.status === 401,
       },
-      [],
-      config,
-      tags,
-    );
+      [], config, tags,);
     const negativeHeaders = [
-      {
-        Authorization: `${user.token}`,
-      },
-      {
-        Authorization: `bearer asdf${user.token}`,
-      },
-      {
-        Authorization: ``,
-      },
+      { Authorization: `${user.token}`, },
+      { Authorization: `bearer asdf${user.token}`, },
+      { Authorization: ``, },
     ];
 
     negativeHeaders.forEach((header) => {
       assertHandler(
-        "invalid token",
-        featureName,
-        route,
-        {},
-        header,
+        "invalid token", featureName, route, {}, header,
         {
           ["should return 401"]: (res) => res.status === 401,
         },
-        [],
-        config,
-        tags,
-      );
+        [], config, tags,);
     });
     const negativeTestObjects = generateTestObjects(
       {
@@ -180,37 +137,22 @@ export function PatchProfileTest(user, config, tags, opts) {
     );
     negativeTestObjects.forEach((payload) => {
       assertHandler(
-        "invalid payload",
-        featureName,
-        route,
-        payload,
-        positiveHeader,
+        "invalid payload", featureName, route, payload, positiveHeader,
         {
           ["should return 400"]: (res) => res.status === 400,
         },
-        [],
-        config,
-        tags,
-      );
+        [], config, tags,);
     });
     assertHandler(
-      "invalid content type",
-      featureName,
-      route,
-      positivePayload,
-      positiveHeader,
+      "invalid content type", featureName, route, positivePayload, positiveHeader,
       {
         ["should return 400"]: (res) => res.status === 400,
       },
-      ["noContentType"],
-      config,
-      tags,
+      ["noContentType"], config, tags,
     );
     if (opts.userCollideInformation) {
       assertHandler(
-        "email duplicate",
-        featureName,
-        route,
+        "email duplicate", featureName, route,
         combine(positivePayload, {
           email: opts.userCollideInformation.email,
         }),
@@ -218,19 +160,12 @@ export function PatchProfileTest(user, config, tags, opts) {
         {
           ["should return 409"]: (res) => res.status === 409,
         },
-        [],
-        config,
-        tags,
-      );
+        [], config, tags,);
     }
   }
 
   const res = assertHandler(
-    "valid payload",
-    featureName,
-    route,
-    positivePayload,
-    positiveHeader,
+    "valid payload", featureName, route, positivePayload, positiveHeader,
     {
       ["should return 200"]: (v) => v.status === 200,
       ["should have email and equal"]: (v) => isEqual(v, "email", user.email),
@@ -243,17 +178,11 @@ export function PatchProfileTest(user, config, tags, opts) {
       ["should have companyImageUri and equal"]: (v) =>
         isEqual(v, "companyImageUri", positivePayload.companyImageUri),
     },
-    [],
-    config,
-    tags,
+    [], config, tags,
   );
   if (config.verifyChanges) {
     testGetAssert(
-      "valid payload after update",
-      featureName,
-      route,
-      {},
-      positiveHeader,
+      "valid payload after update", featureName, route, {}, positiveHeader,
       {
         ["should return 200"]: (v) => v.status === 200,
         ["should have email and equal"]: (v) => isEqual(v, "email", user.email),
@@ -266,9 +195,7 @@ export function PatchProfileTest(user, config, tags, opts) {
         ["should have companyImageUri and equal"]: (v) =>
           isEqual(v, "companyImageUri", positivePayload.companyImageUri),
       },
-      config,
-      tags,
-    );
+      config, tags,);
   }
 
   if (res.isSuccess) {
