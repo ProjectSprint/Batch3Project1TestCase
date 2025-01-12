@@ -11,6 +11,16 @@
     BASE_URL=http://localhost:8080 k6 run main.js
     ```
     ⚠️ Adjust the `BASE_URL` value to your backend path
+### Cookbook 🍳
+- How can I know what's the payload that k6 give and what it receives? Run in debug mode:
+    ```bash
+        DEBUG=true BASE_URL=http://localhost:8080 k6 run main.js
+    ```
+    even better, pipe it to a file for easier searching
+    ```bash
+        DEBUG=true BASE_URL=http://localhost:8080 k6 run main.js &> output.txt
+    ```
+
 
 ### Environment Variables
 - `BASE_URL` (string,url) sets the base url of the backend
