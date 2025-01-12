@@ -42,7 +42,7 @@ export function GetDepartmentTest(user, config, tags) {
       ["should return 200"]: (v) => v.status === 200,
       ["should have departmentId"]: (v) => isExists(v, "[]departmentId"),
       ["should have name"]: (v) => isExists(v, "[]name"),
-      ['should have the correct total data based on pagination']: (v) => isTotalDataInRange(v, '', 1, 5),
+      ['should have the correct total data based on pagination']: (v) => isTotalDataInRange(v, '[]', 1, 5),
     },
     config, tags,);
   const paginationRes = assertHandler("valid payload with pagination", featureName, route,
@@ -50,7 +50,7 @@ export function GetDepartmentTest(user, config, tags) {
     positiveHeader,
     {
       ["should return 200"]: (v) => v.status === 200,
-      ['should have the correct total data based on pagination']: (v) => isTotalDataInRange(v, '', 1, 2),
+      ['should have the correct total data based on pagination']: (v) => isTotalDataInRange(v, '[]', 1, 2),
 
     },
     config, tags,);
@@ -59,7 +59,7 @@ export function GetDepartmentTest(user, config, tags) {
     positiveHeader,
     {
       ["should return 200"]: (v) => v.status === 200,
-      ['should have the correct total data based on pagination']: (v) => isTotalDataInRange(v, '', 1, 2),
+      ['should have the correct total data based on pagination']: (v) => isTotalDataInRange(v, '[]', 1, 2),
       ['should have different data from offset 0']: (res) => {
         try {
           const resp = res.json()
@@ -87,7 +87,7 @@ export function GetDepartmentTest(user, config, tags) {
     {
       ["should return 200"]: (v) => v.status === 200,
       ['should have names that contains "a"']: (v) => isEqualWith(v, '[]name', (a) => a.every(b => typeof b === "string" && b.includes("a"))),
-      ['should have the correct total data based on pagination']: (v) => isTotalDataInRange(v, '', 1, 5),
+      ['should have the correct total data based on pagination']: (v) => isTotalDataInRange(v, '[]', 1, 5),
     },
     config, tags,);
 }

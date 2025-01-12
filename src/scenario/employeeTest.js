@@ -47,7 +47,7 @@ export function GetEmployeeTest(user, config, tags, opts) {
       ["should have name"]: (v) => isExists(v, "[]name"),
       ["should have employeeImageUri"]: (v) => isExists(v, "[]employeeImageUri"),
       ["should have gender"]: (v) => isExists(v, "[]gender"),
-      ['should have the correct total data based on pagination']: (v) => isTotalDataInRange(v, '', 1, 5),
+      ['should have the correct total data based on pagination']: (v) => isTotalDataInRange(v, '[]', 1, 5),
     },
     config, tags,);
   const paginationRes = assertHandler(
@@ -61,7 +61,7 @@ export function GetEmployeeTest(user, config, tags, opts) {
       ["should have name"]: (v) => isExists(v, "[]name"),
       ["should have employeeImageUri"]: (v) => isExists(v, "[]employeeImageUri"),
       ["should have gender"]: (v) => isExists(v, "[]gender"),
-      ['should have the correct total data based on pagination']: (v) => isTotalDataInRange(v, '', 1, 2),
+      ['should have the correct total data based on pagination']: (v) => isTotalDataInRange(v, '[]', 1, 2),
 
     },
     config,
@@ -78,7 +78,7 @@ export function GetEmployeeTest(user, config, tags, opts) {
       ["should have name"]: (v) => isExists(v, "[]name"),
       ["should have employeeImageUri"]: (v) => isExists(v, "[]employeeImageUri"),
       ["should have gender"]: (v) => isExists(v, "[]gender"),
-      ['should have the correct total data based on pagination']: (v) => isTotalDataInRange(v, '', 1, 2),
+      ['should have the correct total data based on pagination']: (v) => isTotalDataInRange(v, '[]', 1, 2),
       ['should have different data from offset 0']: (res) => {
         try {
           const resp = res.json()
@@ -108,7 +108,7 @@ export function GetEmployeeTest(user, config, tags, opts) {
       ['should have name that contains "a"']: (v) => isEqualWith(v, '[]name', (a) => a.every(b => typeof b === "string" && b.includes("a"))),
       ["should have employeeImageUri"]: (v) => isExists(v, "[]employeeImageUri"),
       ["should have gender"]: (v) => isExists(v, "[]gender"),
-      ['should have the correct total data based on pagination']: (v) => isTotalDataInRange(v, '', 1, 5),
+      ['should have the correct total data based on pagination']: (v) => isTotalDataInRange(v, '[]', 1, 5),
     },
     config, tags,);
   const searchedGender = ["male", "female"][generateRandomNumber(0, 1)]
@@ -122,7 +122,7 @@ export function GetEmployeeTest(user, config, tags, opts) {
       ["should have name"]: (v) => isExists(v, "[]name"),
       ["should have employeeImageUri"]: (v) => isExists(v, "[]employeeImageUri"),
       ['should have gender matching the query']: (v) => isEqualWith(v, '[]gender', (a) => a.every(b => typeof b === "string" && b == searchedGender)),
-      ['should have the correct total data based on pagination']: (v) => isTotalDataInRange(v, '', 1, 5),
+      ['should have the correct total data based on pagination']: (v) => isTotalDataInRange(v, '[]', 1, 5),
     },
     config, tags,);
   if (opts.departmentToTest) {
@@ -137,7 +137,7 @@ export function GetEmployeeTest(user, config, tags, opts) {
         ["should have name"]: (v) => isExists(v, "[]name"),
         ["should have employeeImageUri"]: (v) => isExists(v, "[]employeeImageUri"),
         ["should have gender"]: (v) => isExists(v, "[]gender"),
-        ['should have the correct total data based on pagination']: (v) => isTotalDataInRange(v, '', 1, 5),
+        ['should have the correct total data based on pagination']: (v) => isTotalDataInRange(v, '[]', 1, 5),
       },
       config, tags,);
   }
