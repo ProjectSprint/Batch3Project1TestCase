@@ -58,25 +58,21 @@ export function GetProfileTest(user, config, tags) {
  * @param {User} user
  * @param {import("../types/config.d.ts").Config} config
  * @param {{[name: string]: string}} tags
- * @param {{useFileUris?:string[],userCollideInformation?:User} }opts
+ * @param {{useFileUri?:string,userCollideInformation?:User} }opts
   * @returns { User | undefined } more complete user
  */
 export function PatchProfileTest(user, config, tags, opts) {
   const featureName = "Patch Profile";
   const route = config.baseUrl + "/v1/user";
   const assertHandler = testPatchJsonAssert;
-  const fileUris =
-    opts.useFileUris && Array.isArray(opts.useFileUris) ? opts.useFileUris : [];
 
   const positivePayload = {
     email: user.email,
     name: generateRandomName(),
-    userImageUri: fileUris.length
-      ? fileUris[generateRandomNumber(0, fileUris.length)]
+    userImageUri: opts.useFileUri ? opts.useFileUri
       : generateRandomImageUrl(),
     companyName: generateRandomName(),
-    companyImageUri: fileUris
-      ? fileUris[generateRandomNumber(0, fileUris.length)]
+    companyImageUri: opts.useFileUri ? opts.useFileUri
       : generateRandomImageUrl(),
   };
   const positiveHeader = {

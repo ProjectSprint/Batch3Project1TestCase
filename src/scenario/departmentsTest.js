@@ -59,6 +59,8 @@ export function GetDepartmentTest(user, config, tags) {
     positiveHeader,
     {
       ["should return 200"]: (v) => v.status === 200,
+      ["should have departmentId"]: (v) => isExists(v, "[]departmentId"),
+      ["should have name"]: (v) => isExists(v, "[]name"),
       ['should have the correct total data based on pagination']: (v) => isTotalDataInRange(v, '[]', 1, 2),
       ['should have different data from offset 0']: (res) => {
         try {
@@ -195,8 +197,8 @@ export function PostDepartmentTest(user, config, tags) {
  */
 export function PatchDepartmentTest(user, department, config, tags) {
   const featureName = "Patch Department";
-  const routeWithoutId = config.baseUrl + "/v1/department/";
-  const route = routeWithoutId + `${department.departmentId}`;
+  const routeWithoutId = config.baseUrl + "/v1/department";
+  const route = routeWithoutId + `/${department.departmentId}`;
   const assertHandler = testPatchJsonAssert;
 
   const positivePayload = {
@@ -248,12 +250,12 @@ export function PatchDepartmentTest(user, department, config, tags) {
         ["should return 400"]: (res) => res.status === 400,
       },
       ["noContentType"], config, tags,);
-    assertHandler("not exists id", featureName, routeWithoutId, positivePayload, positiveHeader,
+    assertHandler("not exists id", featureName, `${routeWithoutId}/`, positivePayload, positiveHeader,
       {
         ["should return 404"]: (res) => res.status === 404,
       },
       [], config, tags,);
-    assertHandler("invalid id", featureName, routeWithoutId + generateRandomName(), positivePayload, positiveHeader,
+    assertHandler("invalid id", featureName, `${routeWithoutId}/${generateRandomName()}`, positivePayload, positiveHeader,
       {
         ["should return 404"]: (res) => res.status === 404,
       },
@@ -303,8 +305,8 @@ export function PatchDepartmentTest(user, department, config, tags) {
  */
 export function DeleteDepartmentTest(user, department, config, tags) {
   const featureName = "Delete Department";
-  const routeWithoutId = config.baseUrl + "/v1/department/";
-  const route = routeWithoutId + `${department.departmentId}`;
+  const routeWithoutId = config.baseUrl + "/v1/department";
+  const route = routeWithoutId + `/${department.departmentId}`;
   const assertHandler = testDeleteAssert;
 
   const positiveHeader = {
@@ -329,12 +331,12 @@ export function DeleteDepartmentTest(user, department, config, tags) {
         },
         config, tags,);
     });
-    assertHandler("not exists id", featureName, routeWithoutId, {}, positiveHeader, {},
+    assertHandler("not exists id", featureName, `${routeWithoutId}/`, {}, positiveHeader, {},
       {
         ["should return 404"]: (res) => res.status === 404,
       },
       config, tags,);
-    assertHandler("invalid id", featureName, routeWithoutId + generateRandomName(), {}, positiveHeader, {},
+    assertHandler("invalid id", featureName, `${routeWithoutId}/${generateRandomName()}`, {}, positiveHeader, {},
       {
         ["should return 404"]: (res) => res.status === 404,
       },

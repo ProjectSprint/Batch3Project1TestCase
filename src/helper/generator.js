@@ -277,23 +277,29 @@ export function generateRandomPassword(minLength = 5, maxLength = 15) {
  * @returns {string}
  */
 export function generateRandomUsername() {
-  /** @type {readonly string[]} */
+  // @type {readonly string[]} */
   const prefixes = [
-    "An",
-    "Ben",
-    "Jon",
-    "Xen",
-    "Lor",
-    "Sam",
-    "Max",
-    "Jen",
-    "Leo",
-    "Kay",
+    "An", "Ben", "Jon", "Xen", "Lor",
+    "Mar", "Fel", "Cal", "Nor", "Zan",
+    "Vin", "Hal", "Eli", "Oli", "Ray",
+    "Sam", "Tim", "Ken", "Leo", "Kai"
   ];
+
   /** @type {readonly string[]} */
-  const middles = ["dra", "vi", "na", "lo", "ki", "sa", "ra", "li", "mo", "ne"];
-  /** @type {readonly string[]} */
-  const suffixes = ["son", "ton", "ly", "en", "er", "an", "ry", "ley"];
+  const middles = [
+    "dra", "vi", "na", "lo", "ki",
+    "ra", "li", "no", "mi", "ta",
+    "ne", "ro", "sa", "mo", "ze",
+    "fa", "de", "pe", "su", "re"
+  ];
+
+  /** @type {readonly string[]}*/
+  const suffixes = [
+    "son", "ton", "ly", "en", "er",
+    "man", "den", "ren", "vin", "sen",
+    "ler", "ter", "mon", "lin", "ker",
+    "nor", "len", "tan", "ver", "mer"
+  ];
 
   let username = "";
   while (username.length < 5 || username.length > 15) {
@@ -322,13 +328,29 @@ export function generateRandomDate(from, to) {
  * @returns {string}
  */
 export function generateRandomName() {
-  /** @type {readonly string[]} */
-  const prefixes = ["An", "Ben", "Jon", "Xen", "Lor"];
-  /** @type {readonly string[]} */
-  const middles = ["dra", "vi", "na", "lo", "ki"];
-  /** @type {readonly string[]} */
-  const suffixes = ["son", "ton", "ly", "en", "er"];
+  // @type {readonly string[]} */
+  const prefixes = [
+    "An", "Ben", "Jon", "Xen", "Lor",
+    "Mar", "Fel", "Cal", "Nor", "Zan",
+    "Vin", "Hal", "Eli", "Oli", "Ray",
+    "Sam", "Tim", "Ken", "Leo", "Kai"
+  ];
 
+  /** @type {readonly string[]} */
+  const middles = [
+    "dra", "vi", "na", "lo", "ki",
+    "ra", "li", "no", "mi", "ta",
+    "ne", "ro", "sa", "mo", "ze",
+    "fa", "de", "pe", "su", "re"
+  ];
+
+  /** @type {readonly string[]}*/
+  const suffixes = [
+    "son", "ton", "ly", "en", "er",
+    "man", "den", "ren", "vin", "sen",
+    "ler", "ter", "mon", "lin", "ker",
+    "nor", "len", "tan", "ver", "mer"
+  ];
   const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
   const middle = middles[Math.floor(Math.random() * middles.length)];
   const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];

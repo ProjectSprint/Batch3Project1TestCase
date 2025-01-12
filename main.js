@@ -4,6 +4,8 @@ import { generateRandomNumber } from "./src/helper/generator.js"
 import { DeleteEmployeeTest, GetEmployeeTest, PatchEmployeeTest, PostEmployeeTest } from "./src/scenario/employeeTest.js"
 import { fail } from 'k6';
 import { UploadFileTest } from "./src/scenario/fileTest.js";
+import { GetProfileTest, PatchProfileTest } from "./src/scenario/profileTest.js";
+import { file } from "./src/types/k6-http.js";
 
 export const options = {
   vus: 1,
@@ -28,9 +30,15 @@ export default function() {
   }
 
   // ===== AUTH TEST =====
-  const user = RegisterTest(config, tags)
-  if (!user)
-    fail("test stop on Register feature, please check the logs")
+  let users = []
+  for (let index = 0; index < 2; index++) {
+    const user = RegisterTest(config, tags)
+    if (!user)
+      fail("test stop on Register feature, please check the logs")
+    users.push(user)
+  }
+  const user = users[0]
+  const collideUser = users[1]
   LoginTest(user, config, tags)
 
   // ===== UPLOAD TEST =====
@@ -44,6 +52,11 @@ export default function() {
     invalid: invalidFile,
     invalidName: "invalid.sql",
   }, config, tags)
+
+  // ===== PROFILE TEST =====
+  GetProfileTest(user, config, tags)
+  PatchProfileTest(user, config, tags, { useFileUri: fileUri, userCollideInformation: collideUser })
+
 
   // ===== DEPARTMENT TEST =====
   // create 100 department for test

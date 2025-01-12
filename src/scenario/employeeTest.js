@@ -285,8 +285,8 @@ export function PostEmployeeTest(user, config, tags, opts) {
  */
 export function PatchEmployeeTest(user, employee, config, tags, opts) {
   const featureName = "Patch Employee";
-  const routeWithoutId = config.baseUrl + "/v1/employee/";
-  const route = routeWithoutId + `${employee.identityNumber}`;
+  const routeWithoutId = config.baseUrl + "/v1/employee";
+  const route = routeWithoutId + `/${employee.identityNumber}`;
   const assertHandler = testPatchJsonAssert;
 
 
@@ -368,13 +368,13 @@ export function PatchEmployeeTest(user, employee, config, tags, opts) {
       },
       ["noContentType"], config, tags,);
     assertHandler(
-      "not exists id", featureName, routeWithoutId, positivePayload, positiveHeader,
+      "not exists id", featureName, `${routeWithoutId}/`, positivePayload, positiveHeader,
       {
         ["should return 404"]: (res) => res.status === 404,
       },
       [], config, tags,);
     assertHandler(
-      "invalid id", featureName, routeWithoutId + generateRandomName(), positivePayload, positiveHeader,
+      "invalid id", featureName, `${routeWithoutId}/${generateRandomName()}`, positivePayload, positiveHeader,
       {
         ["should return 404"]: (res) => res.status === 404,
       }, [], config, tags,);
@@ -439,8 +439,8 @@ export function PatchEmployeeTest(user, employee, config, tags, opts) {
  */
 export function DeleteEmployeeTest(user, employee, config, tags) {
   const featureName = "Delete Employee";
-  const routeWithoutId = config.baseUrl + "/v1/employee/";
-  const route = routeWithoutId + `${employee.identityNumber}`;
+  const routeWithoutId = config.baseUrl + "/v1/employee";
+  const route = routeWithoutId + `/${employee.identityNumber}`;
   const assertHandler = testDeleteAssert;
 
   const positiveHeader = {
@@ -468,13 +468,13 @@ export function DeleteEmployeeTest(user, employee, config, tags) {
         config, tags,);
     });
     assertHandler(
-      "not exists id", featureName, routeWithoutId, {}, positiveHeader, {},
+      "not exists id", featureName, `${routeWithoutId}/`, {}, positiveHeader, {},
       {
         ["should return 404"]: (res) => res.status === 404,
       },
       config, tags,);
     assertHandler(
-      "invalid id", featureName, routeWithoutId + generateRandomName(), {}, positiveHeader, {},
+      "invalid id", featureName, `${routeWithoutId}/${generateRandomName()}`, {}, positiveHeader, {},
       {
         ["should return 404"]: (res) => res.status === 404,
       },
