@@ -42,6 +42,15 @@ export function UploadFileTest(user, config, tags) {
       );
     });
     assertHandler(
+      "invalid mime type", featureName, route, {
+      file: file("../figure/image-50KB.jpg")
+    },
+      positiveHeader,
+      {
+        ["should return 400"]: (res) => res.status === 400,
+      },
+      ["noContentType"], config, tags,);
+    assertHandler(
       "invalid file type", featureName, route, {
       file: file("../figure/sql-5KB.sql")
     },
@@ -49,7 +58,7 @@ export function UploadFileTest(user, config, tags) {
       {
         ["should return 400"]: (res) => res.status === 400,
       },
-      ["noContentType"], config, tags,);
+      [], config, tags,);
     assertHandler(
       "invalid file size", featureName, route,
       {
@@ -59,14 +68,14 @@ export function UploadFileTest(user, config, tags) {
       {
         ["should return 400"]: (res) => res.status === 400,
       },
-      ["noContentType"], config, tags,
+      [], config, tags,
     );
     assertHandler(
       "invalid content type", featureName, route, positivePayload, positiveHeader,
       {
         ["should return 400"]: (res) => res.status === 400,
       },
-      ["noContentType"], config, tags,);
+      [], config, tags,);
   }
 
   const res = assertHandler(
