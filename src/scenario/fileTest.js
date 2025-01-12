@@ -1,5 +1,4 @@
 import { file } from "k6/http";
-import http from 'k6/http';
 import { isExists } from "../helper/assertion.js";
 import { testPostMultipartAssert } from "../helper/request.js";
 
@@ -16,7 +15,7 @@ export function UploadFileTest(user, fileToTest, config, tags) {
   const assertHandler = testPostMultipartAssert;
 
   const positivePayload = {
-    file: http.file(fileToTest.small, fileToTest.smallName)
+    file: file(fileToTest.small, fileToTest.smallName)
   };
   const positiveHeader = {
     Authorization: `Bearer ${user.token}`,
@@ -63,12 +62,6 @@ export function UploadFileTest(user, fileToTest, config, tags) {
       },
       config, tags,
     );
-    assertHandler(
-      "invalid content type", featureName, route, positivePayload, positiveHeader,
-      {
-        ["should return 400"]: (res) => res.status === 400,
-      },
-      config, tags,);
   }
 
   const res = assertHandler(
