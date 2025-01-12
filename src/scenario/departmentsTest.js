@@ -252,12 +252,12 @@ export function PatchDepartmentTest(user, department, config, tags) {
       {
         ["should return 404"]: (res) => res.status === 404,
       },
-      ["noContentType"], config, tags,);
+      [], config, tags,);
     assertHandler("invalid id", featureName, routeWithoutId + generateRandomName(), positivePayload, positiveHeader,
       {
         ["should return 404"]: (res) => res.status === 404,
       },
-      ["noContentType"], config, tags,
+      [], config, tags,
     );
   }
 
