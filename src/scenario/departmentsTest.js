@@ -71,7 +71,12 @@ export function GetDepartmentTest(user, config, tags) {
             resp.every(isDepartment) &&
             paginationResp.every(isDepartment)) {
             return resp.every(e => {
-              return paginationResp.every(a => a.departmentId !== e.departmentId)
+              return paginationResp.every(a => {
+                console.log(featureName + "should have different data from offset 0 | previous & current response departmentId loop:", e.departmentId, a.departmentId);
+                const result = a.departmentId !== e.departmentId
+                console.log(featureName + "should have different data from offset 0 | is match?:", result);
+                return result
+              })
             })
           }
         } catch (err) {
@@ -88,7 +93,12 @@ export function GetDepartmentTest(user, config, tags) {
     positiveHeader,
     {
       ["should return 200"]: (v) => v.status === 200,
-      ['should have names that contains "a"']: (v) => isEqualWith(v, '[]name', (a) => a.every(b => typeof b === "string" && b.includes("a"))),
+      ['should have names that contains "a"']: (v) => isEqualWith(v, '[]name', (a) => a.every(b => {
+        console.log(featureName + "should have names that contains 'a' | current response name loop:", b);
+        const result = typeof b === "string" && b.includes("a")
+        console.log(featureName + "should have names that contains 'a' | is it contain 'a'?:", result);
+        return result
+      })),
       ['should have the correct total data based on pagination']: (v) => isTotalDataInRange(v, '[]', 1, 5),
     },
     config, tags,);
