@@ -21,13 +21,17 @@ export default function() {
   const tags = {
     env: "local"
   }
+
+  // ===== AUTH TEST =====
   const user = RegisterTest(config, tags)
   if (!user)
     fail("test stop on Register feature, please check the logs")
   LoginTest(user, config, tags)
 
-  UploadFileTest(user, config, tags)
+  // ===== UPLOAD TEST =====
+  const fileUri = UploadFileTest(user, config, tags)
 
+  // ===== DEPARTMENT TEST =====
   // create 100 department for test
   /** @type {Department[]} */
   let departments = []
@@ -45,12 +49,15 @@ export default function() {
   DeleteDepartmentTest(user, department, config, tags)
   departments = departments.splice(pickedDepartmentIndex, 1)
 
+
+  // ===== EMPLOYEE TEST =====
   pickedDepartmentIndex = generateRandomNumber(0, departments.length)
   /** @type {Employee[]} */
   let employees = []
   for (let index = 0; index < 100; index++) {
     let employee = PostEmployeeTest(user, config, tags, {
-      departmentToTest: departments[pickedDepartmentIndex]
+      departmentToTest: departments[pickedDepartmentIndex],
+      useFileUri: fileUri
     })
     if (!employee)
       fail(`test stop on Post Employee feature loop ${index}, please check the logs`)
@@ -59,7 +66,7 @@ export default function() {
 
   let pickedEmployeeIndex = generateRandomNumber(0, employees.length)
   const employee = PatchEmployeeTest(user, employees[pickedEmployeeIndex], config, tags, {
-
+    useFileUri: fileUri
   })
   if (!employee)
     fail("test stop on patch Employee feature, please check the logs")

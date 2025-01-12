@@ -1,13 +1,12 @@
 import { file } from "k6/http";
 import { isExists } from "../helper/assertion.js";
-import { generateTestObjects } from "../helper/generator.js";
 import { testPostMultipartAssert } from "../helper/request.js";
 
 /**
  * @param {User} user
  * @param {import("../types/config.d.ts").Config} config
  * @param {{[name: string]: string}} tags
-  * @returns string uri
+  * @returns {string | undefined} uri
  */
 export function UploadFileTest(user, config, tags) {
   const featureName = "Upload File";
@@ -81,9 +80,7 @@ export function UploadFileTest(user, config, tags) {
   if (res.isSuccess) {
     const jsonResult = res.res.json();
     if (jsonResult) {
-      return {
-        uri: /** @type {{uri:string}} */ (jsonResult).uri,
-      }
+      return /** @type {{uri:string}} */ (jsonResult).uri
     }
   }
 }
