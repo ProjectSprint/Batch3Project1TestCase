@@ -1,20 +1,22 @@
 import { file } from "k6/http";
+import http from 'k6/http';
 import { isExists } from "../helper/assertion.js";
 import { testPostMultipartAssert } from "../helper/request.js";
 
 /**
  * @param {User} user
+ * @param {{small: ArrayBuffer,medium: ArrayBuffer,big: ArrayBuffer,invalid: ArrayBuffer,}} fileToTest
  * @param {import("../types/config.d.ts").Config} config
  * @param {{[name: string]: string}} tags
   * @returns {string | undefined} uri
  */
-export function UploadFileTest(user, config, tags) {
+export function UploadFileTest(user, fileToTest, config, tags) {
   const featureName = "Upload File";
   const route = config.baseUrl + "/v1/file";
   const assertHandler = testPostMultipartAssert;
 
   const positivePayload = {
-    file: file("../figure/image-100KB.jpg"),
+    file: http.file(fileToTest.small)
   };
   const positiveHeader = {
     Authorization: `Bearer ${user.token}`,
@@ -43,7 +45,7 @@ export function UploadFileTest(user, config, tags) {
     });
     assertHandler(
       "invalid mime type", featureName, route, {
-      file: file("../figure/image-50KB.jpg")
+      file: file(fileToTest.small)
     },
       positiveHeader,
       {
@@ -52,7 +54,7 @@ export function UploadFileTest(user, config, tags) {
       ["noContentType"], config, tags,);
     assertHandler(
       "invalid file type", featureName, route, {
-      file: file("../figure/sql-5KB.sql")
+      file: file(fileToTest.invalid)
     },
       positiveHeader,
       {
@@ -62,7 +64,7 @@ export function UploadFileTest(user, config, tags) {
     assertHandler(
       "invalid file size", featureName, route,
       {
-        file: file("../figure/image-200KB.jpg")
+        file: file(fileToTest.big)
       },
       positiveHeader,
       {
