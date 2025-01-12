@@ -94,9 +94,15 @@ export function testPostMultipartAssert(
   config,
   tags,
 ) {
-  const headers = options.includes("noContentType")
-    ? Object.assign({}, headersObj)
-    : Object.assign({ "Content-Type": "multipart/form-data" }, headersObj);
+
+  let headers = { ...headersObj };
+  if (!options.includes("noContentType")) {
+    const boundary = '----WebKitFormBoundary' + Math.random().toString(36).substring(2);
+    headers = {
+      'Content-Type': `multipart/form-data; boundary=${boundary}`,
+      ...headersObj
+    };
+  }
   const res = testPostMultipart(route, body, headers, tags);
   const isSuccess = assert(
     res,
