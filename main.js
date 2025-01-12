@@ -98,7 +98,7 @@ export default function() {
   })
   if (!employee)
     fail("test stop on patch Employee feature, please check the logs")
-  DeleteEmployeeTest(user, employees[pickedEmployeeIndex], config, tags)
+  DeleteEmployeeTest(user, employee, config, tags)
   employees.splice(pickedEmployeeIndex, 1)
 }
 
