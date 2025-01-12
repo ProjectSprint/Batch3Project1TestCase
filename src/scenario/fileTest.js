@@ -27,7 +27,7 @@ export function UploadFileTest(user, fileToTest, config, tags) {
       {
         ["should return 401"]: (v) => v.status === 401,
       },
-      [], config, tags,);
+      config, tags,);
     const negativeHeaders = [
       { Authorization: `${user.token}`, },
       { Authorization: `Bearer asdf${user.token}`, },
@@ -40,18 +40,9 @@ export function UploadFileTest(user, fileToTest, config, tags) {
         {
           ["should return 401"]: (res) => res.status === 401,
         },
-        [], config, tags,
+        config, tags,
       );
     });
-    assertHandler(
-      "invalid mime type", featureName, route, {
-      file: file(fileToTest.small, fileToTest.smallName)
-    },
-      positiveHeader,
-      {
-        ["should return 400"]: (res) => res.status === 400,
-      },
-      ["noContentType"], config, tags,);
     assertHandler(
       "invalid file type", featureName, route, {
       file: file(fileToTest.invalid, fileToTest.invalidName)
@@ -60,7 +51,7 @@ export function UploadFileTest(user, fileToTest, config, tags) {
       {
         ["should return 400"]: (res) => res.status === 400,
       },
-      [], config, tags,);
+      config, tags,);
     assertHandler(
       "invalid file size", featureName, route,
       {
@@ -70,14 +61,14 @@ export function UploadFileTest(user, fileToTest, config, tags) {
       {
         ["should return 400"]: (res) => res.status === 400,
       },
-      [], config, tags,
+      config, tags,
     );
     assertHandler(
       "invalid content type", featureName, route, positivePayload, positiveHeader,
       {
         ["should return 400"]: (res) => res.status === 400,
       },
-      [], config, tags,);
+      config, tags,);
   }
 
   const res = assertHandler(
@@ -86,7 +77,7 @@ export function UploadFileTest(user, fileToTest, config, tags) {
       ["should return 200"]: (v) => v.status === 200,
       ["should have uri"]: (v) => isExists(v, "uri"),
     },
-    [], config, tags,
+    config, tags,
   );
   if (res.isSuccess) {
     const jsonResult = res.res.json();

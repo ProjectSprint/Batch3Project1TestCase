@@ -76,10 +76,9 @@ export function testPostMultipart(
  * @param {string} currentTestName
  * @param {string} route
  * @param {import("k6/http").StructuredRequestBody} body
- * @param {{[name: string]: string}} headersObj
+ * @param {{[name: string]: string}} headers
  * @param {import("../types/k6.d.ts").Checkers<import("k6/http").RefinedResponse<any>>} expectedCase
  * @param {import("../types/config.d.ts").Config} config
- * @param {("noContentType"|"plainBody")[]} options - Additional options for the request.
  * @param {{[name: string]: string}} tags
  * @returns {import("../types/schema.d.ts").RequestAssertResponse<any>} - k6 http response.
  */
@@ -88,21 +87,12 @@ export function testPostMultipartAssert(
   featureName,
   route,
   body,
-  headersObj,
+  headers,
   expectedCase,
-  options = [],
   config,
   tags,
 ) {
 
-  let headers = { ...headersObj };
-  if (!options.includes("noContentType")) {
-    const boundary = '----WebKitFormBoundary' + Math.random().toString(36).substring(2);
-    headers = {
-      'Content-Type': `multipart/form-data; boundary=${boundary}`,
-      ...headersObj
-    };
-  }
   const res = testPostMultipart(route, body, headers, tags);
   const isSuccess = assert(
     res,
