@@ -16,7 +16,7 @@ export function GetEmployeeTest(user, config, tags, opts) {
   const assertHandler = testGetAssert;
 
   const positiveHeader = {
-    Authorization: `bearer ${user.token}`,
+    Authorization: `Bearer ${user.token}`,
   };
   if (config.runNegativeCase) {
     assertHandler("empty token", featureName, route, {}, {},
@@ -26,7 +26,7 @@ export function GetEmployeeTest(user, config, tags, opts) {
       config, tags,);
     const negativeHeaders = [
       { Authorization: `${user.token}`, },
-      { Authorization: `bearer asdf${user.token}`, },
+      { Authorization: `Bearer asdf${user.token}`, },
       { Authorization: ``, },
     ];
 
@@ -167,7 +167,7 @@ export function PostEmployeeTest(user, config, tags, opts) {
     identityNumber: `${generateRandomNumber(10000, 999999999999999)}`
   };
   const positiveHeader = {
-    Authorization: `bearer ${user.token}`,
+    Authorization: `Bearer ${user.token}`,
   };
   if (config.runNegativeCase) {
     assertHandler(
@@ -178,7 +178,7 @@ export function PostEmployeeTest(user, config, tags, opts) {
       [], config, tags);
     const negativeHeaders = [
       { Authorization: `${user.token}`, },
-      { Authorization: `bearer asdf${user.token}`, },
+      { Authorization: `Bearer asdf${user.token}`, },
       { Authorization: ``, },
     ];
 
@@ -299,7 +299,7 @@ export function PatchEmployeeTest(user, employee, config, tags, opts) {
   };
 
   const positiveHeader = {
-    Authorization: `bearer ${user.token}`,
+    Authorization: `Bearer ${user.token}`,
   };
   if (config.runNegativeCase) {
     assertHandler(
@@ -310,7 +310,7 @@ export function PatchEmployeeTest(user, employee, config, tags, opts) {
       [], config, tags,);
     const negativeHeaders = [
       { Authorization: `${user.token}`, },
-      { Authorization: `bearer asdf${user.token}`, },
+      { Authorization: `Bearer asdf${user.token}`, },
       { Authorization: ``, },
     ];
 
@@ -444,7 +444,7 @@ export function DeleteEmployeeTest(user, employee, config, tags) {
   const assertHandler = testDeleteAssert;
 
   const positiveHeader = {
-    Authorization: `bearer ${user.token}`,
+    Authorization: `Bearer ${user.token}`,
   };
   if (config.runNegativeCase) {
     assertHandler(
@@ -455,7 +455,7 @@ export function DeleteEmployeeTest(user, employee, config, tags) {
       config, tags,);
     const negativeHeaders = [
       { Authorization: `${user.token}`, },
-      { Authorization: `bearer asdf${user.token}`, },
+      { Authorization: `Bearer asdf${user.token}`, },
       { Authorization: ``, },
     ];
 

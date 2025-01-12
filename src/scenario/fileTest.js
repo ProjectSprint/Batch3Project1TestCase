@@ -17,7 +17,7 @@ export function UploadFileTest(user, config, tags) {
     file: file("../figure/image-100KB.jpg"),
   };
   const positiveHeader = {
-    Authorization: `bearer ${user.token}`,
+    Authorization: `Bearer ${user.token}`,
   };
   if (config.runNegativeCase) {
     assertHandler(
@@ -28,7 +28,7 @@ export function UploadFileTest(user, config, tags) {
       [], config, tags,);
     const negativeHeaders = [
       { Authorization: `${user.token}`, },
-      { Authorization: `bearer asdf${user.token}`, },
+      { Authorization: `Bearer asdf${user.token}`, },
       { Authorization: ``, },
     ];
 

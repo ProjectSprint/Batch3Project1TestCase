@@ -19,7 +19,7 @@ export function GetProfileTest(user, config, tags) {
   const assertHandler = testGetAssert;
 
   const positiveHeader = {
-    Authorization: `bearer ${user.token}`,
+    Authorization: `Bearer ${user.token}`,
   };
   if (config.runNegativeCase) {
     assertHandler(
@@ -31,7 +31,7 @@ export function GetProfileTest(user, config, tags) {
     );
     const negativeHeaders = [
       { Authorization: `${user.token}`, },
-      { Authorization: `bearer asdf${user.token}`, },
+      { Authorization: `Bearer asdf${user.token}`, },
       { Authorization: ``, },
     ];
 
@@ -80,7 +80,7 @@ export function PatchProfileTest(user, config, tags, opts) {
       : generateRandomImageUrl(),
   };
   const positiveHeader = {
-    Authorization: `bearer ${user.token}`,
+    Authorization: `Bearer ${user.token}`,
   };
   if (config.runNegativeCase) {
     assertHandler(
@@ -91,7 +91,7 @@ export function PatchProfileTest(user, config, tags, opts) {
       [], config, tags,);
     const negativeHeaders = [
       { Authorization: `${user.token}`, },
-      { Authorization: `bearer asdf${user.token}`, },
+      { Authorization: `Bearer asdf${user.token}`, },
       { Authorization: ``, },
     ];
 

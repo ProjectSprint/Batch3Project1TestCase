@@ -14,7 +14,7 @@ export function GetDepartmentTest(user, config, tags) {
   const assertHandler = testGetAssert;
 
   const positiveHeader = {
-    Authorization: `bearer ${user.token}`,
+    Authorization: `Bearer ${user.token}`,
   };
   if (config.runNegativeCase) {
     assertHandler("empty token", featureName, route, {}, {},
@@ -24,7 +24,7 @@ export function GetDepartmentTest(user, config, tags) {
       config, tags,);
     const negativeHeaders = [
       { Authorization: `${user.token}`, },
-      { Authorization: `bearer asdf${user.token}`, },
+      { Authorization: `Bearer asdf${user.token}`, },
       { Authorization: ``, },
     ];
 
@@ -107,7 +107,7 @@ export function PostDepartmentTest(user, config, tags) {
     name: generateRandomName(),
   };
   const positiveHeader = {
-    Authorization: `bearer ${user.token}`,
+    Authorization: `Bearer ${user.token}`,
   };
   if (config.runNegativeCase) {
     assertHandler("empty token", featureName, route, {}, {},
@@ -117,7 +117,7 @@ export function PostDepartmentTest(user, config, tags) {
     );
     const negativeHeaders = [
       { Authorization: `${user.token}`, },
-      { Authorization: `bearer asdf${user.token}`, },
+      { Authorization: `Bearer asdf${user.token}`, },
       { Authorization: ``, },
     ];
 
@@ -203,7 +203,7 @@ export function PatchDepartmentTest(user, department, config, tags) {
     name: generateRandomName(),
   };
   const positiveHeader = {
-    Authorization: `bearer ${user.token}`,
+    Authorization: `Bearer ${user.token}`,
   };
   if (config.runNegativeCase) {
     assertHandler("empty token", featureName, route, {}, {},
@@ -214,7 +214,7 @@ export function PatchDepartmentTest(user, department, config, tags) {
     );
     const negativeHeaders = [
       { Authorization: `${user.token}`, },
-      { Authorization: `bearer asdf${user.token}`, },
+      { Authorization: `Bearer asdf${user.token}`, },
       { Authorization: ``, },
     ];
 
@@ -308,7 +308,7 @@ export function DeleteDepartmentTest(user, department, config, tags) {
   const assertHandler = testDeleteAssert;
 
   const positiveHeader = {
-    Authorization: `bearer ${user.token}`,
+    Authorization: `Bearer ${user.token}`,
   };
   if (config.runNegativeCase) {
     assertHandler("empty token", featureName, route, {}, {}, {},
@@ -318,7 +318,7 @@ export function DeleteDepartmentTest(user, department, config, tags) {
       config, tags,);
     const negativeHeaders = [
       { Authorization: `${user.token}`, },
-      { Authorization: `bearer asdf${user.token}`, },
+      { Authorization: `Bearer asdf${user.token}`, },
       { Authorization: ``, },
     ];
 
