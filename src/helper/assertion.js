@@ -60,32 +60,35 @@ export function isEveryItemDifferent(v, vc, query,) {
     const res = traverseObject(obj, query);
     const resComparator = traverseObject(vComparator, query);
 
-    // Compare each item at the same index
-    return res.every((item, index) => {
-      const comparatorItem = resComparator[index];
-
-      // Handle null and undefined cases
-      if (item === null || comparatorItem === null) {
-        console.log(item, comparatorItem, "isEveryItemDifferent | null!")
-        return false;
-      }
-
-      // Return false if types are different
-      if (typeof item !== typeof comparatorItem) {
-        console.log(typeof item, typeof comparatorItem, "isEveryItemDifferent | types are different!")
-        return false;
-      }
-
+    // Compare each item against all items in comparator
+    return res.every((item) => {
       // Return false if query wasn't deep enough (still array or object)
-      if (Array.isArray(item) || Array.isArray(comparatorItem) ||
-        (typeof item === 'object' && item !== null) ||
-        (typeof comparatorItem === 'object' && comparatorItem !== null)) {
-        console.log(query, "isEveryItemDifferent | query wasn't deep enough!")
+      if (Array.isArray(item) || (typeof item === 'object' && item !== null)) {
         return false;
       }
 
-      // For primitive types, compare values (return true if different)
-      return item !== comparatorItem;
+      // Compare against each comparator item
+      return resComparator.every(comparatorItem => {
+        console.log("item:", item, "comparator:", comparatorItem)
+        // Return false if query wasn't deep enough for comparator
+        if (Array.isArray(comparatorItem) ||
+          (typeof comparatorItem === 'object' && comparatorItem !== null)) {
+          return false;
+        }
+
+        // Handle null cases
+        if (item === null || comparatorItem === null) {
+          return false;
+        }
+
+        // Return false if types are different
+        if (typeof item !== typeof comparatorItem) {
+          return false;
+        }
+
+        // For primitive types, must be different from all comparator items
+        return item !== comparatorItem;
+      });
     });
   } catch (e) {
     return false;

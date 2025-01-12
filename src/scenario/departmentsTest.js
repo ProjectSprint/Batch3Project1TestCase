@@ -1,5 +1,5 @@
 import { isDepartment } from "../assert/test.js";
-import { isEqual, isEqualWith, isEveryItemContain, isEveryItemDifferent, isExists, isTotalDataInRange } from "../helper/assertion.js";
+import { isEqual, isEqualWith, isEveryItemContain as isEveryItemContainWord, isEveryItemDifferent, isExists, isTotalDataInRange } from "../helper/assertion.js";
 import { generateRandomName, generateTestObjects } from "../helper/generator.js";
 import { testDeleteAssert, testGetAssert, testPatchJsonAssert, testPostJsonAssert } from "../helper/request.js";
 
@@ -72,7 +72,7 @@ export function GetDepartmentTest(user, config, tags) {
     positiveHeader,
     {
       ["should return 200"]: (v) => v.status === 200,
-      ['should have names that contains "a"']: (v) => isEveryItemContain(v, "[]name", "a"),
+      ['should have names that contains "a"']: (v) => isEveryItemContainWord(v, "[]name", "a"),
       ['should have the correct total data based on pagination']: (v) => isTotalDataInRange(v, '[]', 1, 5),
     },
     config, tags,);
