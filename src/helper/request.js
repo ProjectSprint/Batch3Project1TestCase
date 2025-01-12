@@ -234,10 +234,10 @@ export function testPatchJsonAssert(
   config,
   tags,
 ) {
-  const res = testPutJson(route, body, headersObj, tags, options);
+  const res = testPatchJson(route, body, headersObj, tags, options);
   const isSuccess = assert(
     res,
-    "PUT",
+    "PATCH",
     body,
     headersObj,
     `${featureName} | ${currentTestName}`,
