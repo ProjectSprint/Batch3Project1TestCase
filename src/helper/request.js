@@ -13,7 +13,7 @@ export function testGet(route, params, headersObj, tags = {}) {
   const queryParams = generateParamFromObj(params);
   const modifiedRoute = route + "?" + queryParams;
 
-  return http.get(modifiedRoute, { headers: headersObj, tags });
+  return http.get(modifiedRoute, { headers: headersObj, tags: tags });
 }
 
 /**
@@ -68,7 +68,7 @@ export function testPostMultipart(
   headers = {},
   tags = {},
 ) {
-  return http.post(route, body, { headers, tags });
+  return http.post(route, body, { headers: headers, tags: tags });
 }
 /**
  * Sends a POST request with JSON data to the specified route and asserts the response.
@@ -134,7 +134,7 @@ export function testPostJson(
     typeof body === "string" && options.includes("plainBody")
       ? body
       : JSON.stringify(body);
-  return http.post(route, parsedBody, { headers, tags });
+  return http.post(route, parsedBody, { headers: headers, tags: tags });
 }
 
 /**
@@ -201,7 +201,7 @@ export function testPatchJson(
       ? body
       : JSON.stringify(body);
 
-  return http.patch(route, parsedBody, { headers, tags });
+  return http.patch(route, parsedBody, { headers: headers, tags: tags });
 }
 
 /**
@@ -261,7 +261,7 @@ export function testPutJson(route, body, headers, tags = {}, options = []) {
       ? body
       : JSON.stringify(body);
 
-  return http.put(route, parsedBody, { headers, tags });
+  return http.put(route, parsedBody, { headers: headers, tags: tags });
 }
 
 /**
@@ -323,7 +323,7 @@ export function testDelete(route, params, headersObj, tags = {}) {
   const modifiedRoute = route + "?" + queryParams;
   const headers = Object.assign({}, headersObj);
 
-  return http.del(modifiedRoute, null, { headers, tags });
+  return http.del(modifiedRoute, null, { headers: headers, tags: tags });
 }
 
 /**
