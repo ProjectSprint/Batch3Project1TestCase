@@ -73,7 +73,7 @@ export default function() {
   if (!department)
     fail("test stop on patch Department feature, please check the logs")
   DeleteDepartmentTest(user, department, config, tags)
-  departments = departments.splice(pickedDepartmentIndex, 1)
+  departments.splice(pickedDepartmentIndex, 1)
 
 
   // ===== EMPLOYEE TEST =====
@@ -99,6 +99,6 @@ export default function() {
   if (!employee)
     fail("test stop on patch Employee feature, please check the logs")
   DeleteEmployeeTest(user, employees[pickedEmployeeIndex], config, tags)
-  employees = employees.splice(pickedEmployeeIndex, 1)
+  employees.splice(pickedEmployeeIndex, 1)
 }
 
