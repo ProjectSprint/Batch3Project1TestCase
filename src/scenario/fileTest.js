@@ -49,7 +49,7 @@ export function UploadFileTest(user, config, tags) {
       {
         ["should return 400"]: (res) => res.status === 400,
       },
-      ["noContentType"], config, tags,);
+      [], config, tags,);
     assertHandler(
       "invalid file size", featureName, route,
       {
@@ -59,7 +59,7 @@ export function UploadFileTest(user, config, tags) {
       {
         ["should return 400"]: (res) => res.status === 400,
       },
-      ["noContentType"], config, tags,
+      [], config, tags,
     );
     assertHandler(
       "invalid content type", featureName, route, positivePayload, positiveHeader,
