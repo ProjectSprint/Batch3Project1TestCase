@@ -36,9 +36,13 @@ export default function() {
   // ===== UPLOAD TEST =====
   const fileUri = UploadFileTest(user, {
     small: smallFile,
+    smallName: "small.jpg",
     medium: medFile,
+    mediumName: "med.jpg",
     big: bigFile,
+    bigName: "big.jpg",
     invalid: invalidFile,
+    invalidName: "invalid.sql",
   }, config, tags)
 
   // ===== DEPARTMENT TEST =====

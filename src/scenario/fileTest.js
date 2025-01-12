@@ -5,7 +5,7 @@ import { testPostMultipartAssert } from "../helper/request.js";
 
 /**
  * @param {User} user
- * @param {{small: ArrayBuffer,medium: ArrayBuffer,big: ArrayBuffer,invalid: ArrayBuffer,}} fileToTest
+ * @param {{small: ArrayBuffer, smallName:string,medium: ArrayBuffer, mediumName:string,big: ArrayBuffer, bigName: string,invalid: ArrayBuffer,invalidName:string}} fileToTest
  * @param {import("../types/config.d.ts").Config} config
  * @param {{[name: string]: string}} tags
   * @returns {string | undefined} uri
@@ -45,7 +45,7 @@ export function UploadFileTest(user, fileToTest, config, tags) {
     });
     assertHandler(
       "invalid mime type", featureName, route, {
-      file: file(fileToTest.small)
+      file: file(fileToTest.small, fileToTest.smallName)
     },
       positiveHeader,
       {
@@ -54,7 +54,7 @@ export function UploadFileTest(user, fileToTest, config, tags) {
       ["noContentType"], config, tags,);
     assertHandler(
       "invalid file type", featureName, route, {
-      file: file(fileToTest.invalid)
+      file: file(fileToTest.invalid, fileToTest.invalidName)
     },
       positiveHeader,
       {
@@ -64,7 +64,7 @@ export function UploadFileTest(user, fileToTest, config, tags) {
     assertHandler(
       "invalid file size", featureName, route,
       {
-        file: file(fileToTest.big)
+        file: file(fileToTest.big, fileToTest.bigName)
       },
       positiveHeader,
       {
