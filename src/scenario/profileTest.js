@@ -3,7 +3,6 @@ import {
   combine,
   generateRandomImageUrl,
   generateRandomName,
-  generateRandomNumber,
   generateTestObjects,
 } from "../helper/generator.js";
 import { testGetAssert, testPatchJsonAssert } from "../helper/request.js";

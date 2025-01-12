@@ -1,4 +1,3 @@
-import { isDepartment } from "../assert/test.js";
 import { isEqual, isEqualWith, isEveryItemContain as isEveryItemContainWord, isEveryItemDifferent, isExists, isTotalDataInRange } from "../helper/assertion.js";
 import { generateRandomName, generateTestObjects } from "../helper/generator.js";
 import { testDeleteAssert, testGetAssert, testPatchJsonAssert, testPostJsonAssert } from "../helper/request.js";
