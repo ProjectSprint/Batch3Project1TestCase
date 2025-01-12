@@ -46,6 +46,83 @@ export function assert(
 
   return check(k6response, checks);
 }
+/**
+ * Checks whether k6 response has the data that the query asks
+ * @param {import('../types/k6-http.d.ts').RefinedResponse<import("../types/k6-http.d.ts").ResponseType | undefined>} v
+ * @param {import('../types/k6-http.d.ts').RefinedResponse<import("../types/k6-http.d.ts").ResponseType | undefined>} vc
+ * @param {string} query
+ * @returns {Boolean}
+ */
+export function isEveryItemDifferent(v, vc, query,) {
+  try {
+    const obj = v.json();
+    const vComparator = vc.json()
+    const res = traverseObject(obj, query);
+    const resComparator = traverseObject(vComparator, query);
+
+    // Compare each item at the same index
+    return res.every((item, index) => {
+      const comparatorItem = resComparator[index];
+
+      // Handle null and undefined cases
+      if (item === null || comparatorItem === null) {
+        console.log(item, comparatorItem, "isEveryItemDifferent | null!")
+        return false;
+      }
+
+      // Return false if types are different
+      if (typeof item !== typeof comparatorItem) {
+        console.log(typeof item, typeof comparatorItem, "isEveryItemDifferent | types are different!")
+        return false;
+      }
+
+      // Return false if query wasn't deep enough (still array or object)
+      if (Array.isArray(item) || Array.isArray(comparatorItem) ||
+        (typeof item === 'object' && item !== null) ||
+        (typeof comparatorItem === 'object' && comparatorItem !== null)) {
+        console.log(query, "isEveryItemDifferent | query wasn't deep enough!")
+        return false;
+      }
+
+      // For primitive types, compare values (return true if different)
+      return item !== comparatorItem;
+    });
+  } catch (e) {
+    return false;
+  }
+}
+
+/**
+ * Checks whether k6 response has the data that the query asks
+ * @param {import('../types/k6-http.d.ts').RefinedResponse<import("../types/k6-http.d.ts").ResponseType | undefined>} v
+ * @param {string} searchStr
+ * @param {string} query
+ * @returns {Boolean}
+ */
+export function isEveryItemContain(v, query, searchStr) {
+  try {
+    const obj = v.json();
+    const res = traverseObject(obj, query);
+
+    // Check each item
+    return res.every(item => {
+      // Handle null and undefined cases
+      if (item === null || item === undefined) {
+        return false;
+      }
+
+      // Return false if not a string
+      if (typeof item !== 'string') {
+        return false;
+      }
+
+      // Check if string contains searchStr
+      return item.includes(searchStr);
+    });
+  } catch (e) {
+    return false;
+  }
+}
 
 /**
  * Checks whether k6 response has the data that the query asks

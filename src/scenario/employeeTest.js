@@ -1,5 +1,5 @@
 import { isEmployee } from "../assert/test.js";
-import { isEqual, isEqualWith, isExists, isTotalDataInRange } from "../helper/assertion.js";
+import { isEqual, isEqualWith, isEveryItemContain, isEveryItemDifferent, isExists, isTotalDataInRange } from "../helper/assertion.js";
 import { generateRandomImageUrl, generateRandomName, generateRandomNumber, generateRandomUsername, generateTestObjects } from "../helper/generator.js";
 import { testDeleteAssert, testGetAssert, testPatchJsonAssert, testPostJsonAssert } from "../helper/request.js";
 
@@ -79,23 +79,7 @@ export function GetEmployeeTest(user, config, tags, opts) {
       ["should have employeeImageUri"]: (v) => isExists(v, "[]employeeImageUri"),
       ["should have gender"]: (v) => isExists(v, "[]gender"),
       ['should have the correct total data based on pagination']: (v) => isTotalDataInRange(v, '[]', 1, 2),
-      ['should have different data from offset 0']: (res) => {
-        try {
-          const resp = res.json()
-          const paginationResp = paginationRes.res.json()
-          if (Array.isArray(resp) &&
-            Array.isArray(paginationResp) &&
-            resp.every(isEmployee) &&
-            paginationResp.every(isEmployee)) {
-            return resp.every(e => {
-              return paginationResp.every(a => a.identityNumber !== e.identityNumber)
-            })
-          }
-        } catch (err) {
-          return false
-        }
-        return false
-      },
+      ['should have different data from offset 0']: (res) => isEveryItemDifferent(res, paginationRes.res, "[]identityNumber"),
     },
     config, tags,);
   assertHandler("valid payload with name query", featureName, route,
@@ -105,7 +89,7 @@ export function GetEmployeeTest(user, config, tags, opts) {
       ["should return 200"]: (v) => v.status === 200,
       ["should have identityNumber"]: (v) => isExists(v, "[]identityNumber"),
       ["should have departmentId"]: (v) => isExists(v, "[]departmentId"),
-      ['should have name that contains "a"']: (v) => isEqualWith(v, '[]name', (a) => a.every(b => typeof b === "string" && b.includes("a"))),
+      ['should have names that contains "a"']: (v) => isEveryItemContain(v, "[]name", "a"),
       ["should have employeeImageUri"]: (v) => isExists(v, "[]employeeImageUri"),
       ["should have gender"]: (v) => isExists(v, "[]gender"),
       ['should have the correct total data based on pagination']: (v) => isTotalDataInRange(v, '[]', 1, 5),

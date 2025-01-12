@@ -1,5 +1,5 @@
 import { isDepartment } from "../assert/test.js";
-import { isEqual, isEqualWith, isExists, isTotalDataInRange } from "../helper/assertion.js";
+import { isEqual, isEqualWith, isEveryItemContain, isEveryItemDifferent, isExists, isTotalDataInRange } from "../helper/assertion.js";
 import { generateRandomName, generateTestObjects } from "../helper/generator.js";
 import { testDeleteAssert, testGetAssert, testPatchJsonAssert, testPostJsonAssert } from "../helper/request.js";
 
@@ -62,28 +62,7 @@ export function GetDepartmentTest(user, config, tags) {
       ["should have departmentId"]: (v) => isExists(v, "[]departmentId"),
       ["should have name"]: (v) => isExists(v, "[]name"),
       ['should have the correct total data based on pagination']: (v) => isTotalDataInRange(v, '[]', 1, 2),
-      ['should have different data from offset 0']: (res) => {
-        try {
-          const resp = res.json()
-          const paginationResp = paginationRes.res.json()
-          if (Array.isArray(resp) &&
-            Array.isArray(paginationResp) &&
-            resp.every(isDepartment) &&
-            paginationResp.every(isDepartment)) {
-            return resp.every(e => {
-              return paginationResp.every(a => {
-                console.log(featureName + "should have different data from offset 0 | previous & current response departmentId loop:", e.departmentId, a.departmentId);
-                const result = a.departmentId !== e.departmentId
-                console.log(featureName + "should have different data from offset 0 | is match?:", result);
-                return result
-              })
-            })
-          }
-        } catch (err) {
-          return false
-        }
-        return false
-      },
+      ['should have different data from offset 0']: (res) => isEveryItemDifferent(res, paginationRes.res, "[]departmentId"),
     },
     config,
     tags,
@@ -93,12 +72,7 @@ export function GetDepartmentTest(user, config, tags) {
     positiveHeader,
     {
       ["should return 200"]: (v) => v.status === 200,
-      ['should have names that contains "a"']: (v) => isEqualWith(v, '[]name', (a) => a.every(b => {
-        console.log(featureName + "should have names that contains 'a' | current response name loop:", b);
-        const result = typeof b === "string" && b.includes("a")
-        console.log(featureName + "should have names that contains 'a' | is it contain 'a'?:", result);
-        return result
-      })),
+      ['should have names that contains "a"']: (v) => isEveryItemContain(v, "[]name", "a"),
       ['should have the correct total data based on pagination']: (v) => isTotalDataInRange(v, '[]', 1, 5),
     },
     config, tags,);
