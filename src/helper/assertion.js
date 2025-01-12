@@ -5,6 +5,7 @@ import { check } from "k6";
  * @param {import('../types/k6-http.d.ts').RefinedResponse<import("../types/k6-http.d.ts").ResponseType | undefined>} k6response
  * @param {string} httpMethod
  * @param {import("k6").JSONValue | import("../types/k6-http.d.ts").StructuredRequestBody} requestPayload
+ * @param {{[name: string]: string}} requestHeader
  * @param {string} featureName
  * @param {import("src/types/k6.js").Checkers<any>} conditions
  * @param {import("src/types/config.js").Config} config
@@ -14,6 +15,7 @@ export function assert(
   k6response,
   httpMethod,
   requestPayload,
+  requestHeader,
   featureName,
   conditions,
   config,
@@ -36,6 +38,7 @@ export function assert(
 
   if (config.debug) {
     console.log(featureName + " | request path:", httpMethod, k6response.url);
+    console.log(featureName + " | request header:", requestHeader);
     console.log(featureName + " | request payload:", requestPayload);
     console.log(featureName + " | response code:", k6response.status);
     console.log(featureName + " | response payload:", k6response.body);
