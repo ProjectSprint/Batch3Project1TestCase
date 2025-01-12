@@ -94,10 +94,10 @@ export function testPostMultipartAssert(
   config,
   tags,
 ) {
-  const res = testPostMultipart(route, body, headersObj, tags);
   const headers = options.includes("noContentType")
     ? Object.assign({}, headersObj)
     : Object.assign({ "Content-Type": "multipart/form-data" }, headersObj);
+  const res = testPostMultipart(route, body, headers, tags);
   const isSuccess = assert(
     res,
     "POST",
@@ -161,10 +161,10 @@ export function testPostJsonAssert(
   config,
   tags,
 ) {
-  const res = testPostJson(route, body, headersObj, tags, options);
   const headers = options.includes("noContentType")
     ? Object.assign({}, headersObj)
     : Object.assign({ "Content-Type": "application/json" }, headersObj);
+  const res = testPostJson(route, body, headers, tags, options);
   const isSuccess = assert(
     res,
     "POST",
@@ -228,10 +228,10 @@ export function testPatchJsonAssert(
   config,
   tags,
 ) {
-  const res = testPatchJson(route, body, headersObj, tags, options);
   const headers = options.includes("noContentType")
     ? Object.assign({}, headersObj)
     : Object.assign({ "Content-Type": "application/json" }, headersObj);
+  const res = testPatchJson(route, body, headers, tags, options);
   const isSuccess = assert(
     res,
     "PATCH",
@@ -288,10 +288,10 @@ export function testPutJsonAssert(
   config,
   tags,
 ) {
-  const res = testPutJson(route, body, headersObj, tags, options);
   const headers = options.includes("noContentType")
     ? Object.assign({}, headersObj)
     : Object.assign({ "Content-Type": "application/json" }, headersObj);
+  const res = testPutJson(route, body, headers, tags, options);
   const isSuccess = assert(
     res,
     "PUT",
