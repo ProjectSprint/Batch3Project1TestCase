@@ -408,7 +408,7 @@ export function PatchEmployeeTest(user, employee, config, tags, opts) {
     testGetAssert(
       "valid payload after update",
       featureName,
-      route,
+      routeWithoutId,
       {
         identityNumber: positivePayload.identityNumber
       },
@@ -489,7 +489,7 @@ export function DeleteEmployeeTest(user, employee, config, tags) {
     config, tags,);
   if (config.verifyChanges) {
     testGetAssert(
-      "valid payload after delete", featureName, route,
+      "valid payload after delete", featureName, routeWithoutId,
       {
         identityNumber: employee.identityNumber
       },

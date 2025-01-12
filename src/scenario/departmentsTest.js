@@ -271,7 +271,7 @@ export function PatchDepartmentTest(user, department, config, tags) {
     [], config, tags,
   );
   if (config.verifyChanges) {
-    testGetAssert("valid payload after update", featureName, route,
+    testGetAssert("valid payload after update", featureName, routeWithoutId,
       {
         name: positivePayload.name
       },
@@ -347,7 +347,7 @@ export function DeleteDepartmentTest(user, department, config, tags) {
     },
     config, tags,);
   if (config.verifyChanges) {
-    testGetAssert("valid payload after delete", featureName, route,
+    testGetAssert("valid payload after delete", featureName, routeWithoutId,
       {
         name: department.name.substring(0, 2)
       },
