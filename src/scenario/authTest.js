@@ -132,7 +132,7 @@ export function RegisterTest(config, tags) {
 
   const positivePayload = {
     email: generateRandomEmail(),
-    password: generateRandomPassword(),
+    password: generateRandomPassword(8, 32),
     action: "create",
   };
 

@@ -251,9 +251,16 @@ export function generateRandomEmail() {
 
 /**
  * @returns {string}
+  * @param {number} minLength
+  * @param {number} maxLength
  */
-export function generateRandomPassword() {
-  const length = Math.floor(Math.random() * 11) + 5;
+export function generateRandomPassword(minLength = 5, maxLength = 15) {
+  // Ensure minLength is not greater than maxLength
+  if (minLength > maxLength) {
+    [minLength, maxLength] = [maxLength, minLength];
+  }
+
+  const length = Math.floor(Math.random() * (maxLength - minLength + 1)) + minLength;
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   let password = "";
