@@ -96,7 +96,7 @@ export function GetDepartmentTest(user, config, tags) {
  * @param {User} user
  * @param {import("../types/config.d.ts").Config} config
  * @param {{[name: string]: string}} tags
-  * @returns Department 
+  * @returns {Department|undefined} 
  */
 export function PostDepartmentTest(user, config, tags) {
   const featureName = "Post Department";
@@ -191,7 +191,7 @@ export function PostDepartmentTest(user, config, tags) {
  * @param {Department} department
  * @param {import("../types/config.d.ts").Config} config
  * @param {{[name: string]: string}} tags
-  * @returns Department
+  * @returns {Department | undefined}
  */
 export function PatchDepartmentTest(user, department, config, tags) {
   const featureName = "Patch Department";
@@ -300,7 +300,6 @@ export function PatchDepartmentTest(user, department, config, tags) {
  * @param {Department} department
  * @param {import("../types/config.d.ts").Config} config
  * @param {{[name: string]: string}} tags
-  * @returns Department
  */
 export function DeleteDepartmentTest(user, department, config, tags) {
   const featureName = "Delete Department";

@@ -104,7 +104,7 @@ export function testPostMultipartAssert(
   const isSuccess = assert(
     res,
     "POST",
-    { disabled: "can't be displayed, it's a file dude, so long" },
+    body,
     headersObj,
     `${featureName} | ${currentTestName}`,
     expectedCase,
