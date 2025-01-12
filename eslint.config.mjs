@@ -6,6 +6,7 @@ export default [
       sourceType: "module"
     },
     rules: {
+      "object-shorthand": ["error", "never"],
       // Prevent logical operator shortcuts and nullish coalescing
       "no-unused-expressions": ["error", {
         allowShortCircuit: false,

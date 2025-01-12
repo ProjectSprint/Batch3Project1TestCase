@@ -49,8 +49,8 @@ export function testGetAssert(
     config,
   );
   return {
-    isSuccess,
-    res,
+    isSuccess: isSuccess,
+    res: res,
   };
 }
 
@@ -108,8 +108,8 @@ export function testPostMultipartAssert(
     config,
   );
   return {
-    isSuccess,
-    res,
+    isSuccess: isSuccess,
+    res: res,
   };
 }
 /**
@@ -175,8 +175,8 @@ export function testPostJsonAssert(
     config,
   );
   return {
-    isSuccess,
-    res,
+    isSuccess: isSuccess,
+    res: res,
   };
 }
 
@@ -242,8 +242,8 @@ export function testPatchJsonAssert(
     config,
   );
   return {
-    isSuccess,
-    res,
+    isSuccess: isSuccess,
+    res: res,
   };
 }
 /**
@@ -302,8 +302,8 @@ export function testPutJsonAssert(
     config,
   );
   return {
-    isSuccess,
-    res,
+    isSuccess: isSuccess,
+    res: res,
   };
 }
 /**
@@ -361,7 +361,7 @@ export function testDeleteAssert(
     config,
   );
   return {
-    isSuccess,
-    res,
+    isSuccess: isSuccess,
+    res: res,
   };
 }
