@@ -372,12 +372,12 @@ export function PatchEmployeeTest(user, employee, config, tags, opts) {
       {
         ["should return 404"]: (res) => res.status === 404,
       },
-      ["noContentType"], config, tags,);
+      [], config, tags,);
     assertHandler(
       "invalid id", featureName, routeWithoutId + generateRandomName(), positivePayload, positiveHeader,
       {
         ["should return 404"]: (res) => res.status === 404,
-      }, ["noContentType"], config, tags,);
+      }, [], config, tags,);
   }
 
   const res = assertHandler(
