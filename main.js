@@ -1,7 +1,7 @@
 import { LoginTest, RegisterTest } from "./src/scenario/authTest.js"
-import { DeleteDepartmentTest, PatchDepartmentTest, PostDepartmentTest } from "./src/scenario/departmentsTest.js"
+import { DeleteDepartmentTest, GetDepartmentTest, PatchDepartmentTest, PostDepartmentTest } from "./src/scenario/departmentsTest.js"
 import { generateRandomNumber } from "./src/helper/generator.js"
-import { DeleteEmployeeTest, PatchEmployeeTest, PostEmployeeTest } from "./src/scenario/employeeTest.js"
+import { DeleteEmployeeTest, GetEmployeeTest, PatchEmployeeTest, PostEmployeeTest } from "./src/scenario/employeeTest.js"
 import { fail } from 'k6';
 import { UploadFileTest } from "./src/scenario/fileTest.js";
 
@@ -41,7 +41,7 @@ export default function() {
       fail(`test stop on Post Department feature loop ${index}, please check the logs`)
     departments.push(department)
   }
-
+  GetDepartmentTest(user, config, tags)
   let pickedDepartmentIndex = generateRandomNumber(0, departments.length)
   const department = PatchDepartmentTest(user, departments[pickedDepartmentIndex], config, tags)
   if (!department)
@@ -63,8 +63,10 @@ export default function() {
       fail(`test stop on Post Employee feature loop ${index}, please check the logs`)
     employees.push(employee)
   }
-
   let pickedEmployeeIndex = generateRandomNumber(0, employees.length)
+  GetEmployeeTest(user, config, tags, {
+    departmentToTest: departments[pickedDepartmentIndex]
+  })
   const employee = PatchEmployeeTest(user, employees[pickedEmployeeIndex], config, tags, {
     useFileUri: fileUri
   })
