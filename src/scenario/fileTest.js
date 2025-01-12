@@ -7,15 +7,12 @@ import { testPostMultipartAssert } from "../helper/request.js";
  * @param {User} user
  * @param {import("../types/config.d.ts").Config} config
  * @param {{[name: string]: string}} tags
- * @param {{useFileUris?:string[],userCollideInformation?:User} }opts
   * @returns string uri
  */
-export function UploadFileTest(user, config, tags, opts) {
+export function UploadFileTest(user, config, tags) {
   const featureName = "Upload File";
   const route = config.baseUrl + "/v1/file";
   const assertHandler = testPostMultipartAssert;
-  const fileUris =
-    opts.useFileUris && Array.isArray(opts.useFileUris) ? opts.useFileUris : [];
 
   const positivePayload = {
     file: file("../figure/image-100KB.jpg"),
@@ -25,64 +22,37 @@ export function UploadFileTest(user, config, tags, opts) {
   };
   if (config.runNegativeCase) {
     assertHandler(
-      "empty token",
-      featureName,
-      route,
-      {},
-      {},
+      "empty token", featureName, route, {}, {},
       {
         ["should return 401"]: (v) => v.status === 401,
       },
-      [],
-      config,
-      tags,
-    );
+      [], config, tags,);
     const negativeHeaders = [
-      {
-        Authorization: `${user.token}`,
-      },
-      {
-        Authorization: `bearer asdf${user.token}`,
-      },
-      {
-        Authorization: ``,
-      },
+      { Authorization: `${user.token}`, },
+      { Authorization: `bearer asdf${user.token}`, },
+      { Authorization: ``, },
     ];
 
     negativeHeaders.forEach((header) => {
       assertHandler(
-        "invalid token",
-        featureName,
-        route,
-        {},
-        header,
+        "invalid token", featureName, route, {}, header,
         {
           ["should return 401"]: (res) => res.status === 401,
         },
-        [],
-        config,
-        tags,
+        [], config, tags,
       );
     });
     assertHandler(
-      "invalid file type",
-      featureName,
-      route,
-      {
-        file: file("../figure/sql-5KB.sql")
-      },
+      "invalid file type", featureName, route, {
+      file: file("../figure/sql-5KB.sql")
+    },
       positiveHeader,
       {
         ["should return 400"]: (res) => res.status === 400,
       },
-      ["noContentType"],
-      config,
-      tags,
-    );
+      ["noContentType"], config, tags,);
     assertHandler(
-      "invalid file size",
-      featureName,
-      route,
+      "invalid file size", featureName, route,
       {
         file: file("../figure/image-200KB.jpg")
       },
@@ -90,38 +60,23 @@ export function UploadFileTest(user, config, tags, opts) {
       {
         ["should return 400"]: (res) => res.status === 400,
       },
-      ["noContentType"],
-      config,
-      tags,
+      ["noContentType"], config, tags,
     );
     assertHandler(
-      "invalid content type",
-      featureName,
-      route,
-      positivePayload,
-      positiveHeader,
+      "invalid content type", featureName, route, positivePayload, positiveHeader,
       {
         ["should return 400"]: (res) => res.status === 400,
       },
-      ["noContentType"],
-      config,
-      tags,
-    );
+      ["noContentType"], config, tags,);
   }
 
   const res = assertHandler(
-    "valid payload",
-    featureName,
-    route,
-    positivePayload,
-    positiveHeader,
+    "valid payload", featureName, route, positivePayload, positiveHeader,
     {
       ["should return 200"]: (v) => v.status === 200,
       ["should have uri"]: (v) => isExists(v, "uri"),
     },
-    [],
-    config,
-    tags,
+    [], config, tags,
   );
   if (res.isSuccess) {
     const jsonResult = res.res.json();

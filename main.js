@@ -3,6 +3,7 @@ import { DeleteDepartmentTest, PatchDepartmentTest, PostDepartmentTest } from ".
 import { generateRandomNumber } from "./src/helper/generator.js"
 import { DeleteEmployeeTest, PatchEmployeeTest, PostEmployeeTest } from "./src/scenario/employeeTest.js"
 import { fail } from 'k6';
+import { UploadFileTest } from "./src/scenario/fileTest.js";
 
 export const options = {
   vus: 1,
@@ -24,6 +25,8 @@ export default function() {
   if (!user)
     fail("test stop on Register feature, please check the logs")
   LoginTest(user, config, tags)
+
+  UploadFileTest(user, config, tags)
 
   // create 100 department for test
   /** @type {Department[]} */

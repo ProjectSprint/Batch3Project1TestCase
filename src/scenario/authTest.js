@@ -220,7 +220,7 @@ export function RegisterTest(config, tags) {
     );
   }
   if (res.isSuccess) {
-    const jsonResult = res.res.json("token");
+    const jsonResult = res.res.json();
     if (jsonResult) {
       return {
         token: /** @type {User} */ (jsonResult).token,
