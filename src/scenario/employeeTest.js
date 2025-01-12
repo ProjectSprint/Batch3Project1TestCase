@@ -461,20 +461,20 @@ export function DeleteEmployeeTest(user, employee, config, tags) {
 
     negativeHeaders.forEach((header) => {
       assertHandler(
-        "invalid token", featureName, route, {}, header, {},
+        "invalid token", featureName, route, {}, {}, header,
         {
           ["should return 401"]: (res) => res.status === 401,
         },
         config, tags,);
     });
     assertHandler(
-      "not exists id", featureName, `${routeWithoutId}/`, {}, positiveHeader, {},
+      "not exists id", featureName, `${routeWithoutId}/`, {}, {}, positiveHeader,
       {
         ["should return 404"]: (res) => res.status === 404,
       },
       config, tags,);
     assertHandler(
-      "invalid id", featureName, `${routeWithoutId}/${generateRandomName()}`, {}, positiveHeader, {},
+      "invalid id", featureName, `${routeWithoutId}/${generateRandomName()}`, {}, {}, positiveHeader,
       {
         ["should return 404"]: (res) => res.status === 404,
       },
@@ -482,7 +482,7 @@ export function DeleteEmployeeTest(user, employee, config, tags) {
   }
 
   assertHandler(
-    "valid payload", featureName, route, {}, positiveHeader, {},
+    "valid payload", featureName, route, {}, {}, positiveHeader,
     {
       ["should return 200"]: (v) => v.status === 200,
     },
