@@ -58,22 +58,16 @@ export function testGetAssert(
  * Sends a POST request with Multipart data to the specified route.
  * @param {string} route - The route to send the request to.
  * @param {import("k6/http").StructuredRequestBody} body - The request body data
- * @param {{ [name: string]: string }} headersObj - External headers other than `Content-Type`
+ * @param {{ [name: string]: string }} headers - External headers other than `Content-Type`
  * @param {{ [name: string]: string }} tags - Tags for the request
- * @param {("noContentType"|"plainBody")[]} options - Additional options for the request.
- *                                                     Available options: "", "noContentType", "plainBody"
  * @returns {import("../types/k6-http.d.ts").RefinedResponse<any>} - k6 http response.
  */
 export function testPostMultipart(
   route,
   body,
-  headersObj = {},
+  headers = {},
   tags = {},
-  options = [],
 ) {
-  const headers = options.includes("noContentType")
-    ? Object.assign({}, headersObj)
-    : Object.assign({ "Content-Type": "multipart/form-data" }, headersObj);
   return http.post(route, body, { headers, tags });
 }
 /**
@@ -100,12 +94,15 @@ export function testPostMultipartAssert(
   config,
   tags,
 ) {
-  const res = testPostMultipart(route, body, headersObj, tags, options);
+  const res = testPostMultipart(route, body, headersObj, tags);
+  const headers = options.includes("noContentType")
+    ? Object.assign({}, headersObj)
+    : Object.assign({ "Content-Type": "multipart/form-data" }, headersObj);
   const isSuccess = assert(
     res,
     "POST",
     body,
-    headersObj,
+    headers,
     `${featureName} | ${currentTestName}`,
     expectedCase,
     config,
@@ -119,7 +116,7 @@ export function testPostMultipartAssert(
  * Sends a POST request with JSON data to the specified route.
  * @param {string} route - The route to send the request to.
  * @param {string | import("k6").JSONValue} body - The request body data
- * @param {{ [name: string]: string }} headersObj - External headers other than `Content-Type`
+ * @param {{ [name: string]: string }} headers - External headers other than `Content-Type`
  * @param {{ [name: string]: string }} tags - Tags for the request
  * @param {("noContentType"|"plainBody")[]} options - Additional options for the request.
  *                                                     Available options: "", "noContentType", "plainBody"
@@ -129,13 +126,10 @@ export function testPostMultipartAssert(
 export function testPostJson(
   route,
   body,
-  headersObj = {},
+  headers = {},
   tags = {},
   options = [],
 ) {
-  const headers = options.includes("noContentType")
-    ? Object.assign({}, headersObj)
-    : Object.assign({ "Content-Type": "application/json" }, headersObj);
   let parsedBody =
     typeof body === "string" && options.includes("plainBody")
       ? body
@@ -168,11 +162,14 @@ export function testPostJsonAssert(
   tags,
 ) {
   const res = testPostJson(route, body, headersObj, tags, options);
+  const headers = options.includes("noContentType")
+    ? Object.assign({}, headersObj)
+    : Object.assign({ "Content-Type": "application/json" }, headersObj);
   const isSuccess = assert(
     res,
     "POST",
     body,
-    headersObj,
+    headers,
     `${featureName} | ${currentTestName}`,
     expectedCase,
     config,
@@ -189,19 +186,16 @@ export function testPostJsonAssert(
  * @param {string | import("k6").JSONValue} body - The JSON data to send in the request body.
  * @param {("noContentType"|"plainBody")[]} options - Additional options for the request.
  *                                                     Available options: "", "noContentType", "plainBody"
- * @param {{[name: string]: string}} headersObj - External headers other than `Content-Type`
+ * @param {{[name: string]: string}} headers - External headers other than `Content-Type`
  * @returns {import("../types/k6-http.d.ts").RefinedResponse<any>} - k6 http response.
  */
 export function testPatchJson(
   route,
   body,
-  headersObj,
+  headers,
   tags = {},
   options = [],
 ) {
-  const headers = options.includes("noContentType")
-    ? Object.assign({}, headersObj)
-    : Object.assign({ "Content-Type": "application/json" }, headersObj);
   let parsedBody =
     typeof body === "string" && options.includes("plainBody")
       ? body
@@ -235,11 +229,14 @@ export function testPatchJsonAssert(
   tags,
 ) {
   const res = testPatchJson(route, body, headersObj, tags, options);
+  const headers = options.includes("noContentType")
+    ? Object.assign({}, headersObj)
+    : Object.assign({ "Content-Type": "application/json" }, headersObj);
   const isSuccess = assert(
     res,
     "PATCH",
     body,
-    headersObj,
+    headers,
     `${featureName} | ${currentTestName}`,
     expectedCase,
     config,
@@ -255,13 +252,10 @@ export function testPatchJsonAssert(
  * @param {string | import("k6").JSONValue} body - The JSON data to send in the request body.
  * @param {("noContentType"|"plainBody")[]} options - Additional options for the request.
  *                                                     Available options: "", "noContentType", "plainBody"
- * @param {{[name: string]: string}} headersObj - External headers other than `Content-Type`
+ * @param {{[name: string]: string}} headers - External headers other than `Content-Type`
  * @returns {import("../types/k6-http.d.ts").RefinedResponse<any>} - k6 http response.
  */
-export function testPutJson(route, body, headersObj, tags = {}, options = []) {
-  const headers = options.includes("noContentType")
-    ? Object.assign({}, headersObj)
-    : Object.assign({ "Content-Type": "application/json" }, headersObj);
+export function testPutJson(route, body, headers, tags = {}, options = []) {
   let parsedBody =
     typeof body === "string" && options.includes("plainBody")
       ? body
@@ -295,11 +289,14 @@ export function testPutJsonAssert(
   tags,
 ) {
   const res = testPutJson(route, body, headersObj, tags, options);
+  const headers = options.includes("noContentType")
+    ? Object.assign({}, headersObj)
+    : Object.assign({ "Content-Type": "application/json" }, headersObj);
   const isSuccess = assert(
     res,
     "PUT",
     body,
-    headersObj,
+    headers,
     `${featureName} | ${currentTestName}`,
     expectedCase,
     config,
