@@ -16,7 +16,7 @@ export function UploadFileTest(user, fileToTest, config, tags) {
   const assertHandler = testPostMultipartAssert;
 
   const positivePayload = {
-    file: http.file(fileToTest.small)
+    file: http.file(fileToTest.small, fileToTest.smallName)
   };
   const positiveHeader = {
     Authorization: `Bearer ${user.token}`,
