@@ -113,7 +113,7 @@ export function LoginTest(user, config, tags) {
     if (jsonResult) {
       return {
         token: /** @type {User} */ (jsonResult).token,
-        password: /** @type {User} */ (jsonResult).password,
+        password: positivePayload.password,
         email: positivePayload.email,
       };
     }
@@ -224,7 +224,7 @@ export function RegisterTest(config, tags) {
     if (jsonResult) {
       return {
         token: /** @type {User} */ (jsonResult).token,
-        password: /** @type {User} */ (jsonResult).password,
+        password: positivePayload.password,
         email: positivePayload.email,
       };
     }
