@@ -253,6 +253,7 @@ export function PostEmployeeTest(user, config, tags, opts) {
 
   if (res.isSuccess) {
     const jsonResult = res.res.json();
+    console.log("isSuccess true")
     if (jsonResult && isEmployee(jsonResult)) {
       return jsonResult;
     }
