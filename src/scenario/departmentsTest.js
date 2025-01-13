@@ -1,3 +1,4 @@
+import { isDepartment } from "src/caster/caster.js";
 import { isEqual, isEqualWith, isEveryItemContain as isEveryItemContainWord, isEveryItemDifferent, isExists, isTotalDataInRange } from "../helper/assertion.js";
 import { generateRandomName, generateTestObjects } from "../helper/generator.js";
 import { testDeleteAssert, testGetAssert, testPatchJsonAssert, testPostJsonAssert } from "../helper/request.js";
@@ -162,7 +163,7 @@ export function PostDepartmentTest(user, config, tags) {
 
   if (res.isSuccess) {
     const jsonResult = res.res.json();
-    if (jsonResult) {
+    if (jsonResult && isDepartment(jsonResult)) {
       return {
         departmentId: /** @type {Department} */ (jsonResult).departmentId,
         name: /** @type {Department} */ (jsonResult).name,

@@ -62,6 +62,7 @@ export default function() {
   let departments = []
   for (let index = 0; index < 50; index++) {
     let department = PostDepartmentTest(user, config, tags)
+    console.log(`Department Post test ${index} result:`, department);
     if (!department)
       fail(`test stop on Post Department feature loop ${index}, please check the logs`)
     departments.push(department)
@@ -77,10 +78,10 @@ export default function() {
 
 
   // ===== EMPLOYEE TEST =====
+  pickedDepartmentIndex = generateRandomNumber(0, departments.length)
   /** @type {Employee[]} */
   let employees = []
   for (let index = 0; index < 50; index++) {
-    pickedDepartmentIndex = generateRandomNumber(0, departments.length)
     let employee = PostEmployeeTest(user, config, tags, {
       departmentToTest: departments[pickedDepartmentIndex],
       useFileUri: fileUri
