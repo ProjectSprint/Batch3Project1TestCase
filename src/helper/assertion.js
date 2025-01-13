@@ -69,7 +69,6 @@ export function isEveryItemDifferent(v, vc, query,) {
 
       // Compare against each comparator item
       return resComparator.every(comparatorItem => {
-        console.log("item:", item, "comparator:", comparatorItem)
         // Return false if query wasn't deep enough for comparator
         if (Array.isArray(comparatorItem) ||
           (typeof comparatorItem === 'object' && comparatorItem !== null)) {

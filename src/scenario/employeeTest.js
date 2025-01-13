@@ -1,6 +1,6 @@
 import { isEmployee } from "../caster/caster.js";
 import { isEqual, isEqualWith, isEveryItemContain, isEveryItemDifferent, isExists, isTotalDataInRange } from "../helper/assertion.js";
-import { generateRandomImageUrl, generateRandomName, generateRandomNumber, generateRandomUsername, generateTestObjects } from "../helper/generator.js";
+import { combine, generateRandomImageUrl, generateRandomName, generateRandomNumber, generateRandomUsername, generateTestObjects } from "../helper/generator.js";
 import { testDeleteAssert, testGetAssert, testPatchJsonAssert, testPostJsonAssert } from "../helper/request.js";
 
 /**
@@ -203,7 +203,7 @@ export function PostEmployeeTest(user, config, tags, opts) {
           notNull: true,
         },
       },
-      positivePayload,
+      combine(positivePayload, { identityNumber: `${generateRandomNumber(10000, 999999999999999)}` }),
     );
     negativeTestObjects.forEach((payload) => {
       assertHandler(
@@ -250,10 +250,8 @@ export function PostEmployeeTest(user, config, tags, opts) {
         isEqualWith(v, "[]identityNumber", a => a.includes(positivePayload.identityNumber)),
     }, config, tags);
   }
-
   if (res.isSuccess) {
     const jsonResult = res.res.json();
-    console.log("isSuccess true")
     if (jsonResult && isEmployee(jsonResult)) {
       return jsonResult;
     }
@@ -336,7 +334,7 @@ export function PatchEmployeeTest(user, employee, config, tags, opts) {
           notNull: true,
         },
       },
-      positivePayload,
+      combine(positivePayload, { identityNumber: `${generateRandomNumber(10000, 999999999999999)}` }),
     );
     negativeTestObjects.forEach((payload) => {
       assertHandler(
