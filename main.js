@@ -77,14 +77,15 @@ export default function() {
 
 
   // ===== EMPLOYEE TEST =====
-  pickedDepartmentIndex = generateRandomNumber(0, departments.length)
   /** @type {Employee[]} */
   let employees = []
   for (let index = 0; index < 50; index++) {
+    pickedDepartmentIndex = generateRandomNumber(0, departments.length)
     let employee = PostEmployeeTest(user, config, tags, {
       departmentToTest: departments[pickedDepartmentIndex],
       useFileUri: fileUri
     })
+    console.log(`Employee Post test ${index} result:`, employee);
     if (!employee) {
       fail(`test stop on Post Employee feature loop ${index}, please check the logs`)
     }
