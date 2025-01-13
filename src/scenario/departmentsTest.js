@@ -165,8 +165,8 @@ export function PostDepartmentTest(user, config, tags) {
     const jsonResult = res.res.json();
     if (jsonResult && isDepartment(jsonResult)) {
       return {
-        departmentId: /** @type {Department} */ (jsonResult).departmentId,
-        name: /** @type {Department} */ (jsonResult).name,
+        departmentId: jsonResult.departmentId,
+        name: jsonResult.name,
       };
     }
   }
@@ -272,10 +272,10 @@ export function PatchDepartmentTest(user, department, config, tags) {
 
   if (res.isSuccess) {
     const jsonResult = res.res.json();
-    if (jsonResult) {
+    if (jsonResult && isDepartment(jsonResult)) {
       return {
-        departmentId: /** @type {Department} */ (jsonResult).departmentId,
-        name: /** @type {Department} */ (jsonResult).name,
+        departmentId: jsonResult.departmentId,
+        name: jsonResult.name,
       };
     }
   }
