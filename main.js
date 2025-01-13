@@ -58,7 +58,6 @@ export default function() {
 
 
   // ===== DEPARTMENT TEST =====
-  // create 100 department for test
   /** @type {Department[]} */
   let departments = []
   for (let index = 0; index < 50; index++) {
@@ -91,6 +90,7 @@ export default function() {
     }
     employees.push(employee)
   }
+
   let pickedEmployeeIndex = generateRandomNumber(0, employees.length)
   GetEmployeeTest(user, config, tags, {
     departmentToTest: departments[pickedDepartmentIndex]
