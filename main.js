@@ -70,8 +70,9 @@ export default function() {
   GetDepartmentTest(user, config, tags)
   let pickedDepartmentIndex = generateRandomNumber(0, departments.length)
   const department = PatchDepartmentTest(user, departments[pickedDepartmentIndex], config, tags)
-  if (!department)
+  if (!department) {
     fail("test stop on patch Department feature, please check the logs")
+  }
   DeleteDepartmentTest(user, department, config, tags)
   departments.splice(pickedDepartmentIndex, 1)
 
@@ -85,8 +86,9 @@ export default function() {
       departmentToTest: departments[pickedDepartmentIndex],
       useFileUri: fileUri
     })
-    if (!employee)
+    if (!employee) {
       fail(`test stop on Post Employee feature loop ${index}, please check the logs`)
+    }
     employees.push(employee)
   }
   let pickedEmployeeIndex = generateRandomNumber(0, employees.length)
