@@ -120,7 +120,7 @@ export function isEveryItemContain(v, query, searchStr) {
       }
 
       // Check if string contains searchStr
-      return item.includes(searchStr);
+      return item.toLowerCase().includes(searchStr);
     });
   } catch (e) {
     return false;
