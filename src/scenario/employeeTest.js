@@ -1,4 +1,4 @@
-import { isEmployee } from "../assert/test.js";
+import { isEmployee } from "../caster/caster.js";
 import { isEqual, isEqualWith, isEveryItemContain, isEveryItemDifferent, isExists, isTotalDataInRange } from "../helper/assertion.js";
 import { generateRandomImageUrl, generateRandomName, generateRandomNumber, generateRandomUsername, generateTestObjects } from "../helper/generator.js";
 import { testDeleteAssert, testGetAssert, testPatchJsonAssert, testPostJsonAssert } from "../helper/request.js";
