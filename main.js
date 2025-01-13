@@ -92,10 +92,10 @@ export default function() {
     employees.push(employee)
   }
 
-  let pickedEmployeeIndex = generateRandomNumber(0, employees.length)
   GetEmployeeTest(user, config, tags, {
     departmentToTest: departments[pickedDepartmentIndex]
   })
+  let pickedEmployeeIndex = generateRandomNumber(0, employees.length)
   const employee = PatchEmployeeTest(user, employees[pickedEmployeeIndex], config, tags, {
     useFileUri: fileUri
   })
