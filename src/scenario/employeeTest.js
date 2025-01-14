@@ -62,7 +62,6 @@ export function GetEmployeeTest(user, config, tags, opts) {
       ["should have employeeImageUri"]: (v) => isExists(v, "[]employeeImageUri"),
       ["should have gender"]: (v) => isExists(v, "[]gender"),
       ['should have the correct total data based on pagination']: (v) => isTotalDataInRange(v, '[]', 1, 2),
-
     },
     config,
     tags,

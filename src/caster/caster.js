@@ -25,3 +25,33 @@ export function isEmployee(value) {
     'departmentId' in value && typeof value.departmentId === 'string'
     ;
 }
+
+/**
+ * @param {import("k6").JSONValue} value
+ * @returns {value is User}
+ */
+export function isUser(value) {
+  // Basic checks for object and required fields
+  if (typeof value !== 'object' || value === null ||
+    !('token' in value) ||
+    typeof value.token !== 'string') {
+    return false;
+  }
+
+  // Optional fields type checking
+  const fieldTypes = {
+    name: 'string',
+    companyName: 'string',
+    companyImageUri: 'string',
+    userImageUri: 'string'
+  };
+
+  // Check each optional field's type if it exists
+  for (const [field, expectedType] of Object.entries(fieldTypes)) {
+    if (field in value && typeof value[field] !== expectedType) {
+      return false;
+    }
+  }
+
+  return true;
+}

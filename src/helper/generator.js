@@ -272,7 +272,41 @@ export function generateRandomPassword(minLength = 5, maxLength = 15) {
 
   return password;
 }
+/**
+ * Generates a random word using alphabetical characters
+ * @param {number} minLength - Minimum length of the generated word (inclusive)
+ * @param {number} maxLength - Maximum length of the generated word (inclusive)
+ * @returns {string} Random word with length between minLength and maxLength
+ * @throws {Error} If minLength is greater than maxLength or if either parameter is less than 1
+ */
+export function generateRandomWord(minLength, maxLength) {
+  // Input validation
+  if (minLength > maxLength) {
+    throw new Error('minLength cannot be greater than maxLength');
+  }
+  if (minLength < 1 || maxLength < 1) {
+    throw new Error('Length parameters must be greater than 0');
+  }
 
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+  // Generate random length between min and max
+  const length = Math.floor(Math.random() * (maxLength - minLength + 1)) + minLength;
+
+  // Generate the word
+  let result = '';
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    result += characters[randomIndex];
+  }
+
+  return result;
+}
+
+// Example usage:
+// console.log(generateRandomWord(3, 6));  // Could output: "Hello"
+// console.log(generateRandomWord(5, 5));  // Fixed length of 5
+// console.log(generateRandomWord(1, 10)); // Random length between 1 and 10
 /**
  * @returns {string}
  */
@@ -646,4 +680,22 @@ export function generateTestObjects(schema, validTemplate) {
   });
 
   return violations;
+}
+/** 
+  * @param {number} probability
+  * @param {Function} fn
+  * */
+export function withProbability(probability, fn) {
+  // Ensure probability is between 0 and 1
+  if (probability < 0 || probability > 1) {
+    throw new Error('Probability must be between 0 and 1');
+  }
+
+  // Generate random number between 0 and 1
+  const random = Math.random();
+
+  // Execute function if random number is less than probability
+  if (random < probability) {
+    return fn();
+  }
 }

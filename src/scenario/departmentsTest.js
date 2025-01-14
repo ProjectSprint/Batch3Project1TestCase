@@ -177,7 +177,7 @@ export function PostDepartmentTest(user, config, tags) {
  * @param {Department} department
  * @param {import("../types/config.d.ts").Config} config
  * @param {{[name: string]: string}} tags
-  * @returns {Department | undefined}
+ * @returns {Department | undefined}
  */
 export function PatchDepartmentTest(user, department, config, tags) {
   const featureName = "Patch Department";

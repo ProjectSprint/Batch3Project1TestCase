@@ -56,7 +56,6 @@ export default function() {
   GetProfileTest(user, config, tags)
   PatchProfileTest(user, config, tags, { useFileUri: fileUri, userCollideInformation: collideUser })
 
-
   // ===== DEPARTMENT TEST =====
   /** @type {Department[]} */
   let departments = []
