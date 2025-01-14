@@ -12,13 +12,8 @@ pull:
 test:
 	DEBUG=$(DEBUG) BASE_URL=$(BASE_URL) k6 run main.js
 
-# Run k6 tests with environment variables and record the output to output.txt
-test-out:
-	DEBUG=$(DEBUG) BASE_URL=$(BASE_URL) k6 run main.js >> output.txt
-
 # Pull and run tests in one command
 pull-test: pull test
-pull-test-out: pull test-out
 
 # Help command to show available targets
 help:

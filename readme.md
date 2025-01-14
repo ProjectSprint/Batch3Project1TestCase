@@ -14,7 +14,7 @@
 ### Cookbook 🍳
 - How can I know what's the payload that k6 give and what it receives? Run in debug mode:
     ```bash
-        DEBUG=true BASE_URL=http://localhost:8080 make pull-test
+        DEBUG=true BASE_URL=http://localhost:8080 make pull-test &> output.txt
     ```
     For easier searching, you can run this to record the output to `output.txt` for easier searching
     ```bash
