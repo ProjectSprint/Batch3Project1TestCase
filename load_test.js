@@ -13,12 +13,12 @@ export const options = {
       startVUs: 0,
       stages: [
         { duration: '10s', target: 50, },
-        //{ duration: '30s', target: 200, },
-        //{ duration: '1m', target: 800, },
-        //{ duration: '1m', target: 1500, },
-        //{ duration: '30s', target: 3000, },
-        //{ duration: '30s', target: 6000, },
-        //{ duration: '1m', target: 6000, }
+        { duration: '30s', target: 200, },
+        { duration: '1m', target: 800, },
+        { duration: '1m', target: 1500, },
+        { duration: '30s', target: 3000, },
+        { duration: '30s', target: 6000, },
+        { duration: '1m', target: 6000, }
       ]
     }
   },
